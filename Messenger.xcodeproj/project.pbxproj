@@ -11,8 +11,8 @@
 		FECEA55D2157B63D0007FDF4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECEA55C2157B63D0007FDF4 /* ViewController.swift */; };
 		FECEA5602157B63D0007FDF4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FECEA55E2157B63D0007FDF4 /* Main.storyboard */; };
 		FECEA5632157B63D0007FDF4 /* Messenger.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FECEA5612157B63D0007FDF4 /* Messenger.xcdatamodeld */; };
-		FECEA5652157B63D0007FDF4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FECEA5642157B63D0007FDF4 /* Assets.xcassets */; };
 		FECEA5682157B63D0007FDF4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FECEA5662157B63D0007FDF4 /* LaunchScreen.storyboard */; };
+		FECEA56F2157BA910007FDF4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FECEA5642157B63D0007FDF4 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -127,7 +127,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FECEA5682157B63D0007FDF4 /* LaunchScreen.storyboard in Resources */,
-				FECEA5652157B63D0007FDF4 /* Assets.xcassets in Resources */,
+				FECEA56F2157BA910007FDF4 /* Assets.xcassets in Resources */,
 				FECEA5602157B63D0007FDF4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,6 +279,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XLRYR8YGW4;
 				INFOPLIST_FILE = Messenger/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = elektro.Messenger;
@@ -293,6 +294,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XLRYR8YGW4;
 				INFOPLIST_FILE = Messenger/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = elektro.Messenger;
