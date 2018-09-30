@@ -12,7 +12,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
    
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var editImageButton: UIButton!
-    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var editButton: UIButton!
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)   {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -65,7 +65,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         super.viewDidLoad()
         self.profileImageView.layer.masksToBounds = true
         self.editImageButton.layer.masksToBounds = true
-        self.saveButton.layer.masksToBounds = true
+        self.editButton.layer.masksToBounds = true
         
         self.profileImageView.layer.cornerRadius = 40.0
         
@@ -74,13 +74,13 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.editImageButton.layer.cornerRadius = self.editImageButton.frame.size.width / 2
         self.editImageButton.backgroundColor = UIColor(red: 0x3F, green: 0x78, blue: 0xF0)
         
-        self.saveButton.layer.cornerRadius = 15.0
-        self.saveButton.layer.borderWidth = 1.0
-        print("Frame in viewDidLoad: ", self.saveButton.frame)
+        self.editButton.layer.cornerRadius = 15.0
+        self.editButton.layer.borderWidth = 1.0
+        print("Frame in viewDidLoad: ", self.editButton.frame)
         
     }
     override func viewDidAppear(_ animated: Bool) {
-        print("Frame in viewDidAppear: ", self.saveButton.frame)
+        print("Frame in viewDidAppear: ", self.editButton.frame)
         //В данном случае "frame" отличается, потому что метод viewDidAppear вызывается после вычисления позиции и размера всех вьюх, а метод viewDidLoad - до.
     }
 

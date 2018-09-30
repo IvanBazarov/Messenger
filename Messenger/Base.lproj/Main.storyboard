@@ -78,9 +78,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="editButton" destination="FFk-ge-blC" id="b1d-oW-Wrg"/>
                         <outlet property="editImageButton" destination="SU9-8I-3NT" id="Xq4-wq-FYX"/>
                         <outlet property="profileImageView" destination="FmG-ry-kby" id="Fzz-CJ-Sq4"/>
-                        <outlet property="saveButton" destination="FFk-ge-blC" id="U3p-X9-3bF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
