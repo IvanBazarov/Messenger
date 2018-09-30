@@ -1,0 +1,12 @@
+# Xcode
+
+## Build generated
+build/
+DerivedData/
+
+## Various settings
+xcuserdata/
+
+## Other
+*.xccheckout
+*.xcscmblueprint
