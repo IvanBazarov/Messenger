@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FE08E15421611D7700007D7C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE08E15321611D7700007D7C /* ProfileViewController.swift */; };
 		FECEA55B2157B63D0007FDF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECEA55A2157B63D0007FDF4 /* AppDelegate.swift */; };
-		FECEA55D2157B63D0007FDF4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECEA55C2157B63D0007FDF4 /* ViewController.swift */; };
 		FECEA5602157B63D0007FDF4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FECEA55E2157B63D0007FDF4 /* Main.storyboard */; };
 		FECEA5632157B63D0007FDF4 /* Messenger.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FECEA5612157B63D0007FDF4 /* Messenger.xcdatamodeld */; };
 		FECEA5682157B63D0007FDF4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FECEA5662157B63D0007FDF4 /* LaunchScreen.storyboard */; };
@@ -16,9 +16,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FE08E15321611D7700007D7C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		FECEA5572157B63D0007FDF4 /* Messenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Messenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FECEA55A2157B63D0007FDF4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FECEA55C2157B63D0007FDF4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FECEA55F2157B63D0007FDF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FECEA5622157B63D0007FDF4 /* Messenger.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Messenger.xcdatamodel; sourceTree = "<group>"; };
 		FECEA5642157B63D0007FDF4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -57,8 +57,8 @@
 			isa = PBXGroup;
 			children = (
 				FECEA55A2157B63D0007FDF4 /* AppDelegate.swift */,
-				FECEA55C2157B63D0007FDF4 /* ViewController.swift */,
 				FECEA55E2157B63D0007FDF4 /* Main.storyboard */,
+				FE08E15321611D7700007D7C /* ProfileViewController.swift */,
 				FECEA5642157B63D0007FDF4 /* Assets.xcassets */,
 				FECEA5662157B63D0007FDF4 /* LaunchScreen.storyboard */,
 				FECEA5692157B63D0007FDF4 /* Info.plist */,
@@ -94,11 +94,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Иван Базаров";
 				TargetAttributes = {
 					FECEA5562157B63D0007FDF4 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -139,8 +140,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FECEA55D2157B63D0007FDF4 /* ViewController.swift in Sources */,
 				FECEA55B2157B63D0007FDF4 /* AppDelegate.swift in Sources */,
+				FE08E15421611D7700007D7C /* ProfileViewController.swift in Sources */,
 				FECEA5632157B63D0007FDF4 /* Messenger.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -181,6 +182,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -188,6 +190,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -238,6 +241,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -245,6 +249,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -284,7 +289,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = elektro.Messenger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -299,7 +304,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = elektro.Messenger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

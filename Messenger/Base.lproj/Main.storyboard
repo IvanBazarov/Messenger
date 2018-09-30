@@ -1,24 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Profile View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ProfileViewController" customModule="Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder-user" translatesAutoresizingMaskIntoConstraints="NO" id="FmG-ry-kby">
+                                <rect key="frame" x="16" y="36" width="288" height="288"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="FmG-ry-kby" secondAttribute="height" multiplier="1:1" id="UYd-6F-JtT"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ivan Bazarov" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hhS-pz-9OU">
+                                <rect key="frame" x="16" y="336" width="288" height="29"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="249" text="Love ❤️ iOS Development, like butterflies and live in Tinkoff Bank" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ym3-bi-wja">
+                                <rect key="frame" x="16" y="373" width="288" height="41"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FFk-ge-blC">
+                                <rect key="frame" x="16" y="513" width="288" height="39"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="39" id="q0g-XJ-LWE"/>
+                                </constraints>
+                                <state key="normal" title="Редактировать">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SU9-8I-3NT">
+                                <rect key="frame" x="224" y="244" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="FSV-LJ-KOi"/>
+                                    <constraint firstAttribute="width" secondItem="SU9-8I-3NT" secondAttribute="height" multiplier="1:1" id="JK1-BP-BRg"/>
+                                    <constraint firstAttribute="width" constant="80" id="rGE-YS-cK1"/>
+                                </constraints>
+                                <state key="normal" image="slr-camera-2-xxl"/>
+                                <connections>
+                                    <action selector="editImageAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="86I-Ur-Ee1"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SU9-8I-3NT" secondAttribute="trailing" constant="16" id="4Lq-dR-G75"/>
+                            <constraint firstItem="FmG-ry-kby" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="B7b-ZZ-F6P"/>
+                            <constraint firstItem="hhS-pz-9OU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Gow-Ts-Twa"/>
+                            <constraint firstItem="FFk-ge-blC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="KEb-jN-ZIL"/>
+                            <constraint firstItem="hhS-pz-9OU" firstAttribute="top" secondItem="FmG-ry-kby" secondAttribute="bottom" constant="12" id="OML-vy-Afz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hhS-pz-9OU" secondAttribute="trailing" constant="16" id="Wsh-MT-9GP"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ym3-bi-wja" secondAttribute="trailing" constant="16" id="awg-EX-SbQ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="FmG-ry-kby" secondAttribute="trailing" constant="16" id="fpI-Xa-cTm"/>
+                            <constraint firstItem="FmG-ry-kby" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="hRF-qh-Dg3"/>
+                            <constraint firstItem="Ym3-bi-wja" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="iwl-u2-AHm"/>
+                            <constraint firstItem="Ym3-bi-wja" firstAttribute="top" secondItem="hhS-pz-9OU" secondAttribute="bottom" constant="8" id="nSf-kA-04I"/>
+                            <constraint firstItem="hhS-pz-9OU" firstAttribute="top" secondItem="SU9-8I-3NT" secondAttribute="bottom" constant="12" id="rrp-9d-but"/>
+                            <constraint firstItem="FFk-ge-blC" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="-16" id="uKC-52-2mb"/>
+                            <constraint firstItem="FFk-ge-blC" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-16" id="ze1-J4-1mn"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="editImageButton" destination="SU9-8I-3NT" id="Xq4-wq-FYX"/>
+                        <outlet property="profileImageView" destination="FmG-ry-kby" id="Fzz-CJ-Sq4"/>
+                        <outlet property="saveButton" destination="FFk-ge-blC" id="U3p-X9-3bF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="140" y="85.907046476761622"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="placeholder-user" width="300" height="300"/>
+        <image name="slr-camera-2-xxl" width="256" height="256"/>
+    </resources>
 </document>
