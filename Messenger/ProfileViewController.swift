@@ -14,9 +14,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var editImageButton: UIButton!
     @IBOutlet weak var editButton: UIButton!
     
+    @IBAction func dismissView(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)   {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        //print(self.editImageButton.frame)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -76,11 +78,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         self.editButton.layer.cornerRadius = 15.0
         self.editButton.layer.borderWidth = 1.0
-        print("Frame in viewDidLoad: ", self.editButton.frame)
         
     }
     override func viewDidAppear(_ animated: Bool) {
-        print("Frame in viewDidAppear: ", self.editButton.frame)
         //В данном случае "frame" отличается, потому что метод viewDidAppear вызывается после вычисления позиции и размера всех вьюх, а метод viewDidLoad - до.
     }
 
@@ -125,3 +125,4 @@ fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [U
 fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
 	return input.rawValue
 }
+
