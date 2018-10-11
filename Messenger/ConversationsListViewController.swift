@@ -10,6 +10,8 @@ import UIKit
 
 class ConversationsListViewController: UITableViewController {
     
+    let constant = 3e4
+    let cellId = "ConversationCell"
     var usersDatabase:[User] = []
     var usersDatabaseOnline:[User] = []
     var usersDatabaseOffline:[User] = []
@@ -43,8 +45,7 @@ class ConversationsListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpDatabase()
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 44
+        tableView.estimatedRowHeight = 65
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
@@ -54,7 +55,7 @@ class ConversationsListViewController: UITableViewController {
             Database.name = namesArray[i]
             Database.message = messagesArray[i]
             Database.hasUnreadMessages = hasUnreadMessages[i]
-            Database.date = Date() - Double(i) * 3e4
+            Database.date = Date() - Double(i) * constant
             Database.online = ifOnlineArray[i]
             usersDatabase.append(Database)
         }
@@ -94,7 +95,7 @@ class ConversationsListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ConversationCell", for: indexPath) as! ConversationTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ConversationTableViewCell
         
         switch (indexPath.section) {
         case 0:

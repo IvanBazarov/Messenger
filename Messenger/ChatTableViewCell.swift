@@ -14,15 +14,17 @@ protocol ChatCellConfiguration: class {
 }
 
 class ChatTableViewCell: UITableViewCell, ChatCellConfiguration {
+
     
-    @IBOutlet weak var chatGeneralView: UILabel!
+    @IBOutlet weak var chatGeneralView: UITextView!
     
     var msg: String? {
         didSet {
             self.chatGeneralView.text = msg
-            
         }
     }
 }
+
+
 
 
