@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConversationsListViewController: UITableViewController {
+class ConversationsListViewController: UITableViewController, ThemesViewControllerDelegate {
     
     let constant = 3e4
     let cellId = "ConversationCell"
@@ -120,6 +120,37 @@ class ConversationsListViewController: UITableViewController {
                 conversation.title = cell.name
             }
         }
+    }
+    
+    @IBAction func themesTapped(_ sender: Any) {
+        let themesVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ThemesViewController") as! ThemesViewController
+        themesVC.delegate = self
+        let navController = UINavigationController(rootViewController: themesVC)
+        self.present(navController, animated: true, completion: nil)
+    }
+    
+    lazy var changeThemeWithClosure: (UIColor) -> () = { [weak self] (theme: UIColor) in
+        self?.logThemeChanging(selectedTheme: theme)
+    }
+    
+    func themesViewController(_ controller: ThemesViewController, didSelectTheme selectedTheme: UIColor) {
+        logThemeChanging(selectedTheme: selectedTheme)
+    }
+    
+    func logThemeChanging(selectedTheme: UIColor) {
+        print(selectedTheme)
+        saveTheme(selectedTheme)
+        setupTheme(selectedTheme)
+    
+    }
+    
+    func setupTheme(_ theme: UIColor) {
+        UINavigationBar.appearance().backgroundColor = theme
+        
+    }
+    
+    func saveTheme(_ theme: UIColor) {
+        UserDefaults.standard.set(theme, forKey: "theme")
     }
 
 }

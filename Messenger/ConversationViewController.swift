@@ -20,7 +20,6 @@ class ConversationViewController: UITableViewController {
 
     }
 
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -29,7 +28,6 @@ class ConversationViewController: UITableViewController {
         return 7
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var reuseIdentifier: String
         if indexPath.row < 4 {

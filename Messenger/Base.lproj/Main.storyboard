@@ -75,6 +75,18 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Tinkoff Chat" id="mRX-LO-k3J">
+                        <leftBarButtonItems>
+                            <barButtonItem title="ObjC" id="S5b-Iw-jAz">
+                                <connections>
+                                    <action selector="themesTapped:" destination="eRI-a4-dpT" id="GYV-bA-UaY"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Swift" id="o8w-Cd-U8M">
+                                <connections>
+                                    <segue destination="XZO-8F-A4u" kind="presentation" id="dP3-Ch-wMq"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="user" id="IOf-DG-G0j">
                             <connections>
                                 <segue destination="hIc-xi-B7h" kind="presentation" id="wKW-BM-BVe"/>
@@ -84,7 +96,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8AM-g6-sVz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-622.5" y="99.295774647887328"/>
+            <point key="canvasLocation" x="-842" y="99"/>
         </scene>
         <!--Conversation View Controller-->
         <scene sceneID="QI9-9V-ug5">
@@ -169,7 +181,151 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jCR-G7-btE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="99.375" y="98.239436619718305"/>
+            <point key="canvasLocation" x="-58" y="99"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="VT6-E2-fcJ">
+            <objects>
+                <navigationController id="XZO-8F-A4u" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SQ8-hB-bvD">
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="VtP-eg-uoC" kind="relationship" relationship="rootViewController" id="ZA0-CE-We8"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NqM-9a-L7N" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="662" y="-581"/>
+        </scene>
+        <!--Themes View Controller Swift-->
+        <scene sceneID="oDu-F3-32E">
+            <objects>
+                <viewController id="VtP-eg-uoC" customClass="ThemesViewControllerSwift" customModule="Messenger" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BjQ-m7-mus">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ENU-24-3qb">
+                                <rect key="frame" x="94" y="110" width="133" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Тема 1"/>
+                                <connections>
+                                    <action selector="themesTapped:" destination="VtP-eg-uoC" eventType="touchUpInside" id="a23-TC-1XE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nr1-m3-oNu">
+                                <rect key="frame" x="94" y="180" width="133" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Тема 2"/>
+                                <connections>
+                                    <action selector="themesTapped:" destination="VtP-eg-uoC" eventType="touchUpInside" id="Yiu-HT-CUx"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lUl-Kl-IOX">
+                                <rect key="frame" x="94" y="250" width="133" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Тема 3"/>
+                                <connections>
+                                    <action selector="themesTapped:" destination="VtP-eg-uoC" eventType="touchUpInside" id="CAp-tb-lTD"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.98640993450000003" green="0.99953407049999998" blue="0.1810254822" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="lUl-Kl-IOX" firstAttribute="top" secondItem="nr1-m3-oNu" secondAttribute="bottom" constant="40" id="8S1-CM-Jl6"/>
+                            <constraint firstItem="udZ-ty-W27" firstAttribute="trailing" secondItem="lUl-Kl-IOX" secondAttribute="trailing" constant="93" id="AtO-Jw-7Vi"/>
+                            <constraint firstItem="udZ-ty-W27" firstAttribute="trailing" secondItem="nr1-m3-oNu" secondAttribute="trailing" constant="93" id="QcQ-Vh-SBT"/>
+                            <constraint firstItem="lUl-Kl-IOX" firstAttribute="leading" secondItem="udZ-ty-W27" secondAttribute="leading" constant="94" id="QyS-2m-Unq"/>
+                            <constraint firstItem="nr1-m3-oNu" firstAttribute="leading" secondItem="udZ-ty-W27" secondAttribute="leading" constant="94" id="TwC-fY-wPm"/>
+                            <constraint firstItem="ENU-24-3qb" firstAttribute="top" secondItem="udZ-ty-W27" secondAttribute="top" constant="46" id="Zas-5e-HrF"/>
+                            <constraint firstItem="udZ-ty-W27" firstAttribute="trailing" secondItem="ENU-24-3qb" secondAttribute="trailing" constant="93" id="ktD-oy-jDn"/>
+                            <constraint firstItem="ENU-24-3qb" firstAttribute="leading" secondItem="udZ-ty-W27" secondAttribute="leading" constant="94" id="l6a-hy-dW4"/>
+                            <constraint firstItem="nr1-m3-oNu" firstAttribute="top" secondItem="ENU-24-3qb" secondAttribute="bottom" constant="40" id="ofU-9i-vfs"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="udZ-ty-W27"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="4Bs-t1-EPK">
+                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="NgQ-19-5zq">
+                            <connections>
+                                <action selector="dismissButtonTapped:" destination="VtP-eg-uoC" id="WId-Eq-RuH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outletCollection property="buttons" destination="ENU-24-3qb" collectionClass="NSMutableArray" id="rf2-DT-xlv"/>
+                        <outletCollection property="buttons" destination="nr1-m3-oNu" collectionClass="NSMutableArray" id="xR7-qe-yll"/>
+                        <outletCollection property="buttons" destination="lUl-Kl-IOX" collectionClass="NSMutableArray" id="TVM-gj-P9u"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4UM-rI-hQD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1355.625" y="-582.04225352112678"/>
+        </scene>
+        <!--Themes View Controller-->
+        <scene sceneID="Omx-zJ-gpz">
+            <objects>
+                <viewController storyboardIdentifier="ThemesViewController" id="d3E-cH-LKT" customClass="ThemesViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tXb-pW-21l">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wkf-uW-3IQ">
+                                <rect key="frame" x="94" y="110" width="133" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Тема 1"/>
+                                <connections>
+                                    <action selector="someThemeTapped:" destination="d3E-cH-LKT" eventType="touchUpInside" id="N6w-lJ-YG9"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bXR-CY-rac">
+                                <rect key="frame" x="94" y="180" width="133" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Тема 2"/>
+                                <connections>
+                                    <action selector="someThemeTapped:" destination="d3E-cH-LKT" eventType="touchUpInside" id="t77-8s-euF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f8t-de-J5d">
+                                <rect key="frame" x="94" y="250" width="133" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Тема 3"/>
+                                <connections>
+                                    <action selector="someThemeTapped:" destination="d3E-cH-LKT" eventType="touchUpInside" id="GGc-1S-qQ1"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.98640993454247305" green="0.99953407049999998" blue="0.18102548216975434" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="bXR-CY-rac" firstAttribute="leading" secondItem="64q-fX-2np" secondAttribute="leading" constant="94" id="0E8-g2-H9s"/>
+                            <constraint firstItem="bXR-CY-rac" firstAttribute="top" secondItem="wkf-uW-3IQ" secondAttribute="bottom" constant="40" id="8im-ET-Vt8"/>
+                            <constraint firstItem="f8t-de-J5d" firstAttribute="leading" secondItem="64q-fX-2np" secondAttribute="leading" constant="94" id="QYB-eo-NMK"/>
+                            <constraint firstItem="f8t-de-J5d" firstAttribute="top" secondItem="bXR-CY-rac" secondAttribute="bottom" constant="40" id="VOR-7C-XnK"/>
+                            <constraint firstItem="wkf-uW-3IQ" firstAttribute="top" secondItem="64q-fX-2np" secondAttribute="top" constant="90" id="Yev-Sm-gEs"/>
+                            <constraint firstItem="64q-fX-2np" firstAttribute="trailing" secondItem="bXR-CY-rac" secondAttribute="trailing" constant="93" id="d5i-sN-ytt"/>
+                            <constraint firstItem="64q-fX-2np" firstAttribute="trailing" secondItem="wkf-uW-3IQ" secondAttribute="trailing" constant="93" id="e4h-Si-AV7"/>
+                            <constraint firstItem="64q-fX-2np" firstAttribute="trailing" secondItem="f8t-de-J5d" secondAttribute="trailing" constant="93" id="tL2-D9-mfS"/>
+                            <constraint firstItem="wkf-uW-3IQ" firstAttribute="leading" secondItem="64q-fX-2np" secondAttribute="leading" constant="94" id="uPa-2U-XTU"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="64q-fX-2np"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="J0T-bW-PcB">
+                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="o9i-PV-WJo">
+                            <connections>
+                                <action selector="dismissButtonTapped:" destination="d3E-cH-LKT" id="guz-yx-uaA"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outletCollection property="buttons" destination="wkf-uW-3IQ" id="dtZ-ED-e7d"/>
+                        <outletCollection property="buttons" destination="bXR-CY-rac" id="EGV-ds-DhH"/>
+                        <outletCollection property="buttons" destination="f8t-de-J5d" id="WJs-Jj-pcI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3nz-Da-yvU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-58.125" y="-580.9859154929577"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BRQ-G8-gxr">
@@ -201,7 +357,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QHB-Hq-3hi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="756"/>
+            <point key="canvasLocation" x="-844" y="868"/>
         </scene>
         <!--Профиль-->
         <scene sceneID="tne-QT-ifu">
@@ -285,7 +441,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="855" y="755"/>
+            <point key="canvasLocation" x="-58" y="867"/>
         </scene>
     </scenes>
     <resources>

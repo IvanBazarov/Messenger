@@ -8,8 +8,6 @@
 
 import UIKit
 
-import UIKit
-
 protocol ConversationCellConfiguration {
     var name: String? { get set }
     var message: String? { get set }
