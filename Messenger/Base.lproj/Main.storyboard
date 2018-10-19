@@ -78,12 +78,13 @@
                         <leftBarButtonItems>
                             <barButtonItem title="ObjC" id="S5b-Iw-jAz">
                                 <connections>
-                                    <action selector="themesTapped:" destination="eRI-a4-dpT" id="GYV-bA-UaY"/>
+                                    <action selector="themesTapped:" destination="eRI-a4-dpT" id="UoB-DJ-smj"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="Swift" id="o8w-Cd-U8M">
                                 <connections>
-                                    <segue destination="XZO-8F-A4u" kind="presentation" id="dP3-Ch-wMq"/>
+                                    <action selector="themesTappedSwift:" destination="eRI-a4-dpT" id="2VY-Ko-4GM"/>
+                                    <segue destination="XZO-8F-A4u" kind="presentation" identifier="swiftSegue" id="dP3-Ch-wMq"/>
                                 </connections>
                             </barButtonItem>
                         </leftBarButtonItems>
@@ -202,7 +203,7 @@
         <!--Themes View Controller Swift-->
         <scene sceneID="oDu-F3-32E">
             <objects>
-                <viewController id="VtP-eg-uoC" customClass="ThemesViewControllerSwift" customModule="Messenger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ThemesViewControllerSwift" id="VtP-eg-uoC" customClass="ThemesViewControllerSwift" customModule="Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BjQ-m7-mus">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

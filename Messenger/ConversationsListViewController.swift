@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConversationsListViewController: UITableViewController, ThemesViewControllerDelegate {
+class ConversationsListViewController: UITableViewController {
     
     let constant = 3e4
     let cellId = "ConversationCell"
@@ -125,32 +125,41 @@ class ConversationsListViewController: UITableViewController, ThemesViewControll
     @IBAction func themesTapped(_ sender: Any) {
         let themesVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ThemesViewController") as! ThemesViewController
         themesVC.delegate = self
+        if UserDefaults.standard.color(forKey: "theme") == nil {
+            themesVC.navigationController?.navigationBar.backgroundColor = .white
+            themesVC.view.backgroundColor = .yellow
+        }
+ 
         let navController = UINavigationController(rootViewController: themesVC)
         self.present(navController, animated: true, completion: nil)
+    }
+    
+    @IBAction func themesTappedSwift(_ sender: Any) {
+        let themesVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ThemesViewControllerSwift") as! ThemesViewControllerSwift
+        
+        if UserDefaults.standard.color(forKey: "theme") == nil {
+            themesVC.navigationController?.navigationBar.backgroundColor = .white
+            themesVC.view.backgroundColor = .yellow
+        }
+        themesVC.onChangeTheme = changeThemeWithClosure
     }
     
     lazy var changeThemeWithClosure: (UIColor) -> () = { [weak self] (theme: UIColor) in
         self?.logThemeChanging(selectedTheme: theme)
     }
     
+    func logThemeChanging(selectedTheme: UIColor) {
+        print(selectedTheme)
+    }
+   
+
+}
+
+extension ConversationsListViewController: ThemesViewControllerDelegate {
     func themesViewController(_ controller: ThemesViewController, didSelectTheme selectedTheme: UIColor) {
         logThemeChanging(selectedTheme: selectedTheme)
     }
-    
-    func logThemeChanging(selectedTheme: UIColor) {
-        print(selectedTheme)
-        saveTheme(selectedTheme)
-        setupTheme(selectedTheme)
-    
-    }
-    
-    func setupTheme(_ theme: UIColor) {
-        UINavigationBar.appearance().backgroundColor = theme
-        
-    }
-    
-    func saveTheme(_ theme: UIColor) {
-        UserDefaults.standard.set(theme, forKey: "theme")
-    }
 
 }
+
+
