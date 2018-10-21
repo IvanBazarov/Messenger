@@ -8,12 +8,11 @@
 
 import UIKit
 
-
 class ThemesViewControllerSwift: UIViewController {
     
     let model = Themes()
     var onChangeTheme: ((UIColor) -> Void)?
- 
+    
     
     @IBAction func dismissButtonTapped(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -26,20 +25,24 @@ class ThemesViewControllerSwift: UIViewController {
         
         switch (sender.tag) {
         case 1:
-            themeColor = self.model.theme1
+            themeColor = self.model.theme1;
+            break;
         case 2:
-            themeColor = self.model.theme2
+            themeColor = self.model.theme2;
+            break;
         case 3:
-            themeColor = self.model.theme3
+            themeColor = self.model.theme3;
+            break;
         default:
-            break
+            break;
         }
+        
         onChangeTheme?(themeColor)
         setUpTheme(themeColor)
         setUpNavBar(themeColor)
         saveTheme(themeColor)
-        
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if UserDefaults.standard.color(forKey: "theme") != nil {
@@ -61,8 +64,6 @@ class ThemesViewControllerSwift: UIViewController {
         self.navigationController?.navigationBar.backgroundColor = theme
         /*let vc = ConversationsListViewController()
         vc.changeThemeWithClosure(theme)*/
-        
     }
+    
 }
-
-

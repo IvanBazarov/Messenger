@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConversationsListViewController: UITableViewController {
+class ConversationsListViewController: UITableViewController, ThemesViewControllerDelegate {
     
     let constant = 3e4
     let cellId = "ConversationCell"
@@ -129,7 +129,7 @@ class ConversationsListViewController: UITableViewController {
             themesVC.navigationController?.navigationBar.backgroundColor = .white
             themesVC.view.backgroundColor = .yellow
         }
- 
+        
         let navController = UINavigationController(rootViewController: themesVC)
         self.present(navController, animated: true, completion: nil)
     }
@@ -148,16 +148,12 @@ class ConversationsListViewController: UITableViewController {
         self?.logThemeChanging(selectedTheme: theme)
     }
     
-    func logThemeChanging(selectedTheme: UIColor) {
-        print(selectedTheme)
-    }
-   
-
-}
-
-extension ConversationsListViewController: ThemesViewControllerDelegate {
     func themesViewController(_ controller: ThemesViewController, didSelectTheme selectedTheme: UIColor) {
         logThemeChanging(selectedTheme: selectedTheme)
+    }
+    
+    func logThemeChanging(selectedTheme: UIColor) {
+        print(selectedTheme)
     }
 
 }

@@ -8,15 +8,76 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ProfileViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
    
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var editImageButton: UIButton!
     @IBOutlet weak var editButton: UIButton!
+    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var descriptionLabel: UILabel!
+    @IBOutlet var nameTextField: UITextField!
+    @IBOutlet var descriptionTextField: UITextField!
+    @IBOutlet var operationButton: UIButton!
+    @IBOutlet var GCDButton: UIButton!
+    @IBOutlet var activityIndicatorView: UIActivityIndicatorView!
+    var selectedDataManager: DataManager!
+    var operationDataManager = OperationDataManager()
+    var userProfile: UserProfile!
+    let gcdDataManager = GCDDataManager()
+    var isSavingData: Bool = false
+    var isPhotoSelected: Bool = false
+    var isEditingProfile: Bool = false {
+        didSet {
+            editImageButton.isHidden = !editImageButton.isHidden
+            nameTextField.isHidden = !nameTextField.isHidden
+            GCDButton.isHidden = !GCDButton.isHidden
+            operationButton.isHidden = !operationButton.isHidden
+            descriptionTextField.isHidden = !descriptionTextField.isHidden
+            if isEditingProfile {
+                GCDButton.isEnabled = false
+                operationButton.isEnabled = false
+                editButton.setTitle("Отменить редактирование", for: .normal)
+                nameLabel.text =  "Имя пользователя"
+                descriptionLabel.text = "О себе"
+                nameTextField.placeholder = "Укажите свое имя"
+                descriptionTextField.placeholder = "Расскажите о себе"
+                nameTextField.text = userProfile.name
+                descriptionTextField.text = userProfile.description
+            } else {
+                editButton.setTitle("Редактировать", for: .normal)
+                updateProfileInfo()
+            }
+        }
+    }
+    
     
     @IBAction func dismissView(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction func nameEditingEnd(_ sender: UITextField) {
+        saveButtonsControl()
+    }
+    
+    @IBAction func descriptionEditingEnd(_ sender: UITextField) {
+        saveButtonsControl()
+    }
+    
+    @IBAction func GCDButtonTapped(_ sender: UIButton) {
+        selectedDataManager = gcdDataManager
+        saveUserProfile()
+    }
+    
+    @IBAction func operationButtonTapped(_ sender: UIButton) {
+        selectedDataManager = operationDataManager
+        saveUserProfile()
+    }
+    @IBAction func editButtonTapped(_ sender: UIButton) {
+        isEditingProfile = !isEditingProfile
+    }
+    
+    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)   {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -29,7 +90,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     
-    @IBAction func editImageAction(_ sender: Any) {
+    @IBAction func editImageAction(_ sender: UITapGestureRecognizer) {
         print("Выбери изображение профиля")
         
         let alertController = UIAlertController(title: "Выберите изображение для профиля", message: "", preferredStyle: .actionSheet)
@@ -56,10 +117,19 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
         let cancelAction = UIAlertAction(title: "Отмена", style: .cancel) { (action: UIAlertAction) in
         }
-        
         alertController.addAction(addPhotoAction)
         alertController.addAction(makePhotoAction)
         alertController.addAction(cancelAction)
+        
+        if isPhotoSelected {
+            let deletePhotoAlertAction = UIAlertAction(title: "Удалить фотографию", style: .destructive) {(action: UIAlertAction) in
+                self.profileImageView.image = UIImage(named: "placeholder-user")
+                self.isPhotoSelected = false
+                self.saveButtonsControl()
+            }
+            alertController.addAction(deletePhotoAlertAction)
+        }
+
         self.present(alertController, animated: true, completion: nil)
     }
     
@@ -79,7 +149,14 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.editButton.layer.cornerRadius = 15.0
         self.editButton.layer.borderWidth = 1.0
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard(gesture:)))
+        view.addGestureRecognizer(tapGesture)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown), name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHidden), name: UIResponder.keyboardWillHideNotification, object: nil)
+        loadUserProfile()
+        
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         //В данном случае "frame" отличается, потому что метод viewDidAppear вызывается после вычисления позиции и размера всех вьюх, а метод viewDidLoad - до.
     }
@@ -93,8 +170,99 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.profileImageView.image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage
         self.profileImageView.contentMode = UIView.ContentMode.scaleAspectFill
         self.profileImageView.clipsToBounds = true
+        GCDButton.isEnabled = true
+        operationButton.isEnabled = true
+        isPhotoSelected = true
         dismiss(animated: true, completion: nil)
     }
+    
+    private func saveButtonsControl() {
+        if (!isSavingData && (nameTextField.text != "") && ((nameTextField.text != userProfile.name) || (descriptionTextField.text != userProfile.description || (profileImageView.image! != userProfile.userImage)))) {
+            
+            GCDButton.isEnabled = true
+            operationButton.isEnabled = true
+        }
+    }
+    
+    @objc func hideKeyboard(gesture: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
+    
+    private func loadUserProfile() {
+        editButton.isHidden = true
+        selectedDataManager = operationDataManager
+        activityIndicatorView.startAnimating()
+        gcdDataManager.getProfile { (profile) in
+            self.userProfile = profile
+            self.activityIndicatorView.stopAnimating()
+            self.activityIndicatorView.isHidden = true
+            self.editButton.isHidden = false
+            self.updateProfileInfo()
+        }
+    }
+
+    
+    private func saveUserProfile() {
+        isSavingData = true
+        GCDButton.isEnabled = false
+        operationButton.isEnabled = false
+        activityIndicatorView.isHidden = false
+        activityIndicatorView.startAnimating()
+        let newProfile = UserProfile(name: nameTextField.text!, description: descriptionTextField.text!, userImage: profileImageView.image!)
+        selectedDataManager.saveProfile(new: newProfile, old: userProfile) { (error) in
+            if error == nil {
+                self.userProfile = newProfile
+                let alert = UIAlertController(title: "Данные сохранены", message: nil, preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "Ок", style: .default) { action in
+                    if self.isEditingProfile {
+                        self.isEditingProfile = false
+                    } else {
+                        self.updateProfileInfo()
+                    }
+                }
+                alert.addAction(okAction)
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                let alert = UIAlertController(title: "Ошибка", message: "Не удалось сохранить данные", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "Ок", style: .default, handler: nil)
+                let repeatAction = UIAlertAction(title: "Повтор", style: .default) { action in
+                    self.saveUserProfile()
+                }
+                alert.addAction(okAction)
+                alert.addAction(repeatAction)
+                self.present(alert, animated: true, completion: nil)
+            }
+            self.activityIndicatorView.stopAnimating()
+            self.activityIndicatorView.isHidden = true
+            self.GCDButton.isEnabled = true
+            self.operationButton.isEnabled = true
+            self.isSavingData = false
+        }
+    }
+    
+    private func updateProfileInfo() {
+        nameLabel.text = userProfile.name
+        descriptionLabel.text = userProfile.description
+        profileImageView.image = userProfile.userImage
+    }
+    
+    
+    
+    @objc private func keyboardWasShown(_ notification: NSNotification) {
+        guard let info = notification.userInfo, let keyboardFrameValue = info[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue else { return }
+        let keyboardFrame = keyboardFrameValue.cgRectValue
+        let keyboardSize = keyboardFrame.size
+        let keyboardInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+        scrollView.contentInset = keyboardInsets
+        scrollView.scrollIndicatorInsets = keyboardInsets
+    }
+    
+    
+    @objc private func keyboardWillHidden() {
+        scrollView.contentInset = UIEdgeInsets.zero
+        scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
+    }
+    
 
 }
 
@@ -115,6 +283,8 @@ extension UIColor {
         )
     }
 }
+
+
 
 // Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {

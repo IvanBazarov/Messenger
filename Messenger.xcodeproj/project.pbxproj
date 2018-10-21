@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		FE08E15421611D7700007D7C /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE08E15321611D7700007D7C /* ProfileViewController.swift */; };
+		FE1F1097217CC0CF00694AA2 /* GCDDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1F1096217CC0CF00694AA2 /* GCDDataManager.swift */; };
+		FE1F1099217CC0E100694AA2 /* OperationDataManager..swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1F1098217CC0E100694AA2 /* OperationDataManager..swift */; };
+		FE1F109B217CC26000694AA2 /* GeneralSaveProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1F109A217CC26000694AA2 /* GeneralSaveProtocol.swift */; };
+		FE1F109D217CC2BA00694AA2 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1F109C217CC2BA00694AA2 /* UserProfile.swift */; };
+		FE1F109F217CD59F00694AA2 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1F109E217CD59F00694AA2 /* AsyncOperation.swift */; };
 		FE35D38C2173720A00853120 /* ThemesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FE35D38B2173720A00853120 /* ThemesViewController.m */; };
 		FE78F8572173D2B90086CBCD /* ThemesViewControllerSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE78F8562173D2B90086CBCD /* ThemesViewControllerSwift.swift */; };
 		FE7CF30C216A321500F4ECBF /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7CF30B216A321500F4ECBF /* ConversationsListViewController.swift */; };
@@ -26,6 +31,11 @@
 
 /* Begin PBXFileReference section */
 		FE08E15321611D7700007D7C /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		FE1F1096217CC0CF00694AA2 /* GCDDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDDataManager.swift; sourceTree = "<group>"; };
+		FE1F1098217CC0E100694AA2 /* OperationDataManager..swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationDataManager..swift; sourceTree = "<group>"; };
+		FE1F109A217CC26000694AA2 /* GeneralSaveProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSaveProtocol.swift; sourceTree = "<group>"; };
+		FE1F109C217CC2BA00694AA2 /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		FE1F109E217CD59F00694AA2 /* AsyncOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		FE35D38B2173720A00853120 /* ThemesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThemesViewController.m; sourceTree = "<group>"; };
 		FE35D38D2173725400853120 /* ThemesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThemesViewController.h; sourceTree = "<group>"; };
 		FE35D38E21737ADC00853120 /* Messenger-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Messenger-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -71,11 +81,51 @@
 			path = ObjCFiles;
 			sourceTree = "<group>";
 		};
+		FECA92C5217CFC2500EF9710 /* UserModel */ = {
+			isa = PBXGroup;
+			children = (
+				FE8A08CC216AA99800BCE9BF /* UserClass.swift */,
+				FE1F109C217CC2BA00694AA2 /* UserProfile.swift */,
+			);
+			path = UserModel;
+			sourceTree = "<group>";
+		};
+		FECA92C6217CFC6800EF9710 /* ThemesControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FE78F8562173D2B90086CBCD /* ThemesViewControllerSwift.swift */,
+				FE78F8532173CBCC0086CBCD /* ObjCFiles */,
+			);
+			path = ThemesControllers;
+			sourceTree = "<group>";
+		};
+		FECA92C7217CFCB400EF9710 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FEEB31612173C37900B2E220 /* UserDefaultsExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		FECA92C8217CFCF400EF9710 /* DataManagers */ = {
+			isa = PBXGroup;
+			children = (
+				FE1F109E217CD59F00694AA2 /* AsyncOperation.swift */,
+				FE1F109A217CC26000694AA2 /* GeneralSaveProtocol.swift */,
+				FE1F1096217CC0CF00694AA2 /* GCDDataManager.swift */,
+				FE1F1098217CC0E100694AA2 /* OperationDataManager..swift */,
+			);
+			path = DataManagers;
+			sourceTree = "<group>";
+		};
 		FECEA54E2157B63D0007FDF4 = {
 			isa = PBXGroup;
 			children = (
-				FE78F8532173CBCC0086CBCD /* ObjCFiles */,
+				FECA92C7217CFCB400EF9710 /* Extensions */,
+				FECA92C6217CFC6800EF9710 /* ThemesControllers */,
 				FECEA5592157B63D0007FDF4 /* Messenger */,
+				FECA92C5217CFC2500EF9710 /* UserModel */,
+				FECA92C8217CFCF400EF9710 /* DataManagers */,
 				FECEA5582157B63D0007FDF4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -91,7 +141,6 @@
 		FECEA5592157B63D0007FDF4 /* Messenger */ = {
 			isa = PBXGroup;
 			children = (
-				FE78F8562173D2B90086CBCD /* ThemesViewControllerSwift.swift */,
 				FE35D38E21737ADC00853120 /* Messenger-Bridging-Header.h */,
 				FECEA55A2157B63D0007FDF4 /* AppDelegate.swift */,
 				FE7CF30B216A321500F4ECBF /* ConversationsListViewController.swift */,
@@ -99,8 +148,6 @@
 				FE7CF30F216A376C00F4ECBF /* ConversationTableViewCell.swift */,
 				FE08E15321611D7700007D7C /* ProfileViewController.swift */,
 				FEA44812216A742E0042A9A2 /* ChatTableViewCell.swift */,
-				FE8A08CC216AA99800BCE9BF /* UserClass.swift */,
-				FEEB31612173C37900B2E220 /* UserDefaultsExtension.swift */,
 				FECEA5642157B63D0007FDF4 /* Assets.xcassets */,
 				FECEA55E2157B63D0007FDF4 /* Main.storyboard */,
 				FECEA5662157B63D0007FDF4 /* LaunchScreen.storyboard */,
@@ -184,17 +231,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				FECEA55B2157B63D0007FDF4 /* AppDelegate.swift in Sources */,
+				FE1F109B217CC26000694AA2 /* GeneralSaveProtocol.swift in Sources */,
 				FE7CF30C216A321500F4ECBF /* ConversationsListViewController.swift in Sources */,
 				FEA44811216A6D340042A9A2 /* ConversationViewController.swift in Sources */,
 				FE08E15421611D7700007D7C /* ProfileViewController.swift in Sources */,
 				FEA44813216A742E0042A9A2 /* ChatTableViewCell.swift in Sources */,
+				FE1F1097217CC0CF00694AA2 /* GCDDataManager.swift in Sources */,
+				FE1F1099217CC0E100694AA2 /* OperationDataManager..swift in Sources */,
 				FE35D38C2173720A00853120 /* ThemesViewController.m in Sources */,
 				FECEA5632157B63D0007FDF4 /* Messenger.xcdatamodeld in Sources */,
 				FEEB31602173B6F300B2E220 /* Themes.m in Sources */,
 				FE7CF311216A376C00F4ECBF /* ConversationTableViewCell.swift in Sources */,
 				FE8A08CD216AA99800BCE9BF /* UserClass.swift in Sources */,
+				FE1F109F217CD59F00694AA2 /* AsyncOperation.swift in Sources */,
 				FE78F8572173D2B90086CBCD /* ThemesViewControllerSwift.swift in Sources */,
 				FEEB31622173C37900B2E220 /* UserDefaultsExtension.swift in Sources */,
+				FE1F109D217CC2BA00694AA2 /* UserProfile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
