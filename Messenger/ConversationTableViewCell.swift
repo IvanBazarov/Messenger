@@ -37,7 +37,11 @@ class ConversationTableViewCell: UITableViewCell, ConversationCellConfiguration 
     
     var name: String? {
         didSet {
-            nameLabel.text = name
+            if name == "" {
+                nameLabel.text = "No name"
+            }else {
+                nameLabel.text = name
+            }
         }
     }
     var message: String? {

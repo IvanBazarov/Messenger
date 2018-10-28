@@ -9,9 +9,23 @@
 import UIKit
 
 class User: NSObject {
-    var name: String = ""
+    var userID: String
+    var name: String?
     var message: String?
-    var hasUnreadMessages: Bool = false
-    var date: Date = Date()
-    var online: Bool = false
+    var hasUnreadMessages: Bool
+    var date: Date?
+    var online: Bool 
+    var messageHistory: [Message] = []
+    
+    init(userID: String, name: String?) {
+        self.userID = userID
+        self.name = name
+        hasUnreadMessages = false
+        online = true
+    }
+    
+    enum Message {
+        case incoming(String)
+        case outgoing(String)
+    }
 }
