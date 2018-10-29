@@ -15,12 +15,12 @@ protocol ChatCellConfiguration: class {
 
 class ChatTableViewCell: UITableViewCell, ChatCellConfiguration {
 
-    
     @IBOutlet weak var chatGeneralView: UITextView!
     
     var msg: String? {
         didSet {
             self.chatGeneralView.text = msg
+            self.chatGeneralView.textContainerInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         }
     }
 }

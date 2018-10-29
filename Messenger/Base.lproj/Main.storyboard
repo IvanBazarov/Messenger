@@ -71,19 +71,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Tinkoff Chat" id="mRX-LO-k3J">
-                        <leftBarButtonItems>
-                            <barButtonItem title="ObjC" id="S5b-Iw-jAz">
-                                <connections>
-                                    <action selector="themesTapped:" destination="eRI-a4-dpT" id="aCy-Wd-eV3"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Swift" id="o8w-Cd-U8M">
-                                <connections>
-                                    <action selector="themesTappedSwift:" destination="eRI-a4-dpT" id="SUF-bH-LiN"/>
-                                    <segue destination="XZO-8F-A4u" kind="presentation" id="dP3-Ch-wMq"/>
-                                </connections>
-                            </barButtonItem>
-                        </leftBarButtonItems>
+                        <barButtonItem key="leftBarButtonItem" title="App Theme" id="o8w-Cd-U8M">
+                            <connections>
+                                <action selector="themesTappedSwift:" destination="eRI-a4-dpT" id="SUF-bH-LiN"/>
+                                <segue destination="XZO-8F-A4u" kind="presentation" id="dP3-Ch-wMq"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="user" id="IOf-DG-G0j">
                             <connections>
                                 <segue destination="hIc-xi-B7h" kind="presentation" id="wKW-BM-BVe"/>
@@ -110,17 +103,17 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="523"/>
                                 <color key="backgroundColor" red="0.96863728761672974" green="0.97393983602523804" blue="0.8947376012802124" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="incomingMsgCell" id="prz-wm-aE0" customClass="ChatTableViewCell" customModule="Messenger" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="incomingMsgCell" rowHeight="50" id="prz-wm-aE0" customClass="ChatTableViewCell" customModule="Messenger" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="prz-wm-aE0" id="qXL-5z-1cp">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Inc message" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hir-zq-WPd">
-                                                    <rect key="frame" x="6" y="9" width="240" height="34"/>
-                                                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Inc message" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hir-zq-WPd">
+                                                    <rect key="frame" x="6" y="4" width="106.5" height="41.5"/>
+                                                    <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -130,9 +123,9 @@
                                                 </textView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="Hir-zq-WPd" secondAttribute="bottom" constant="0.5" id="6z1-T6-MLj"/>
-                                                <constraint firstItem="Hir-zq-WPd" firstAttribute="top" secondItem="qXL-5z-1cp" secondAttribute="top" constant="9" id="HhT-Te-5H2"/>
-                                                <constraint firstItem="Hir-zq-WPd" firstAttribute="width" secondItem="qXL-5z-1cp" secondAttribute="width" multiplier="0.75" id="QJF-Es-7IS"/>
+                                                <constraint firstAttribute="bottom" secondItem="Hir-zq-WPd" secondAttribute="bottom" constant="4" id="6z1-T6-MLj"/>
+                                                <constraint firstItem="Hir-zq-WPd" firstAttribute="top" secondItem="qXL-5z-1cp" secondAttribute="top" constant="4" id="HhT-Te-5H2"/>
+                                                <constraint firstItem="Hir-zq-WPd" firstAttribute="width" relation="lessThanOrEqual" secondItem="qXL-5z-1cp" secondAttribute="width" multiplier="0.75" id="QJF-Es-7IS"/>
                                                 <constraint firstItem="Hir-zq-WPd" firstAttribute="leading" secondItem="qXL-5z-1cp" secondAttribute="leading" constant="6" id="ZlI-2m-lmg"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -141,17 +134,18 @@
                                             <outlet property="chatGeneralView" destination="Hir-zq-WPd" id="DCU-HV-ywS"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="outgoingMsgCell" id="YYk-R8-wiB" customClass="ChatTableViewCell" customModule="Messenger" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="320" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="outgoingMsgCell" rowHeight="50" id="YYk-R8-wiB" customClass="ChatTableViewCell" customModule="Messenger" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="78" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YYk-R8-wiB" id="Tw2-M4-yUp">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Out message" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XKh-zI-1PA">
-                                                    <rect key="frame" x="74" y="9" width="240" height="34"/>
-                                                    <color key="backgroundColor" red="0.63416391439999997" green="1" blue="0.98902703700000005" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <rect key="frame" x="202.5" y="4" width="111.5" height="41.5"/>
+                                                    <color key="backgroundColor" red="0.1852364205" green="0.65339166370000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -162,9 +156,9 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="XKh-zI-1PA" secondAttribute="trailing" constant="6" id="1de-dZ-T6n"/>
-                                                <constraint firstItem="XKh-zI-1PA" firstAttribute="width" secondItem="Tw2-M4-yUp" secondAttribute="width" multiplier="0.75" id="SG3-vi-zuf"/>
-                                                <constraint firstAttribute="bottom" secondItem="XKh-zI-1PA" secondAttribute="bottom" constant="0.5" id="r9B-qO-mW6"/>
-                                                <constraint firstItem="XKh-zI-1PA" firstAttribute="top" secondItem="Tw2-M4-yUp" secondAttribute="top" constant="9" id="rOs-mE-RlE"/>
+                                                <constraint firstItem="XKh-zI-1PA" firstAttribute="width" relation="lessThanOrEqual" secondItem="Tw2-M4-yUp" secondAttribute="width" multiplier="0.75" id="SG3-vi-zuf"/>
+                                                <constraint firstAttribute="bottom" secondItem="XKh-zI-1PA" secondAttribute="bottom" constant="4" id="r9B-qO-mW6"/>
+                                                <constraint firstItem="XKh-zI-1PA" firstAttribute="top" secondItem="Tw2-M4-yUp" secondAttribute="top" constant="4" id="rOs-mE-RlE"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.96861535310745239" green="0.97380810976028442" blue="0.90293890237808228" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -184,7 +178,7 @@
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kGF-mm-4hs">
                                         <rect key="frame" x="0.0" y="0.0" width="264" height="30"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <action selector="messageViewChanged:" destination="Uv9-cQ-Lao" eventType="editingChanged" id="PLR-jl-xje"/>
