@@ -13,6 +13,7 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    static let shared = AppDelegate()
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         return true
@@ -41,34 +42,65 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
     }
 
-    func applicationWillTerminate(_ application: UIApplication) {
-        self.saveContext()
-    }
 
     // MARK: - Core Data stack
 
-    lazy var persistentContainer: NSPersistentContainer = {
-    
-        let container = NSPersistentContainer(name: "Messenger")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
-        return container
+    private lazy var storeUrl: URL = {
+        let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let documentsUrl = url.appendingPathComponent("Messenger.sqlite")
+        
+        return documentsUrl
     }()
-
-    // MARK: - Core Data Saving support
-
-    func saveContext () {
-        let context = persistentContainer.viewContext
+    
+    lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
+        guard let mom = Bundle.main.url(forResource: "Messenger", withExtension: "momd") else { fatalError("Can't search the resource") }
+        guard let managedObjectModel = NSManagedObjectModel(contentsOf: mom) else { fatalError("Can't search the object model by this url: \(mom)") }
+        let coordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
+        do {
+            try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: self.storeUrl, options: nil)
+        } catch {
+            assert(false, "Error adding store: \(error)")
+        }
+        return coordinator
+    }()
+    
+    lazy var masterContext: NSManagedObjectContext = {
+        var masterContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        masterContext.persistentStoreCoordinator = self.persistentStoreCoordinator
+        masterContext.mergePolicy = NSOverwriteMergePolicy
+        return masterContext
+    }()
+    
+    lazy var mainContext: NSManagedObjectContext = {
+        var mainContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        mainContext.parent = self.masterContext
+        mainContext.mergePolicy = NSOverwriteMergePolicy
+        return mainContext
+    }()
+    
+    lazy var saveContext:NSManagedObjectContext = {
+        var saveContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        saveContext.parent = self.mainContext
+        saveContext.mergePolicy = NSOverwriteMergePolicy
+        return saveContext
+    }()
+    
+    func performSave(in context: NSManagedObjectContext, completion: CompletionSaveHandler?) {
         if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            context.perform {
+                do {
+                    try context.save()
+                } catch {
+                    completion?(error)
+                }
+                if let parentContext = context.parent {
+                    self.performSave(in: parentContext, completion: completion)
+                } else {
+                    completion?(nil)
+                }
             }
+        } else {
+            completion?(nil)
         }
     }
 

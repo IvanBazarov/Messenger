@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct GCDDataManager: DataManager {
+struct GCDDataManager {
     
     let syncQueue = DispatchQueue(label: "com.IvanBazarov", qos: .userInitiated)
     let documentsDirectory: URL
@@ -53,12 +53,12 @@ struct GCDDataManager: DataManager {
         }
     }
     
-    func saveProfile(new profile: UserProfile, old: UserProfile, completion: @escaping CompletionSaveHandler) {
+    func saveProfile(old: UserProfile, new profile: UserProfile, completion: @escaping CompletionSaveHandler) {
         syncQueue.async {
             if profile.name != old.name {
                 self.saveNameWith(profile.name)
             }
-            if profile.description != old.name {
+            if profile.description != old.description {
                 self.saveDescriptionWith(profile.description)
             }
             if profile.userImage != old.userImage {

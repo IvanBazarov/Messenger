@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct OperationDataManager: DataManager {
+struct OperationDataManager {
     var documentsDirectory: URL
     var archiveURL: URL
     let operationQueue = OperationQueue()

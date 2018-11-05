@@ -7,48 +7,51 @@
 //
 
 import UIKit
+import CoreData
 
 class ProfileViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
    
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var editImageButton: UIButton!
     @IBOutlet weak var editButton: UIButton!
+    @IBOutlet var saveUsingCoreData: UIButton!
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var descriptionLabel: UILabel!
     @IBOutlet var nameTextField: UITextField!
     @IBOutlet var descriptionTextField: UITextField!
-    @IBOutlet var operationButton: UIButton!
-    @IBOutlet var GCDButton: UIButton!
     @IBOutlet var activityIndicatorView: UIActivityIndicatorView!
     var selectedDataManager: DataManager!
-    var operationDataManager = OperationDataManager()
-    var userProfile: UserProfile!
-    let gcdDataManager = GCDDataManager()
+    var appUser: AppUser!
+    var storageManager = StorageManager()
     var isSavingData: Bool = false
     var isPhotoSelected: Bool = false
     var isEditingProfile: Bool = false {
         didSet {
             editImageButton.isHidden = !editImageButton.isHidden
             nameTextField.isHidden = !nameTextField.isHidden
-            GCDButton.isHidden = !GCDButton.isHidden
-            operationButton.isHidden = !operationButton.isHidden
+            saveUsingCoreData.isHidden = !saveUsingCoreData.isHidden
             descriptionTextField.isHidden = !descriptionTextField.isHidden
             if isEditingProfile {
-                GCDButton.isEnabled = false
-                operationButton.isEnabled = false
+                saveUsingCoreData.isEnabled = false
                 editButton.setTitle("Отменить редактирование", for: .normal)
                 nameLabel.text =  "Имя пользователя"
                 descriptionLabel.text = "О себе"
                 nameTextField.placeholder = "Укажите свое имя"
                 descriptionTextField.placeholder = "Расскажите о себе"
-                nameTextField.text = userProfile.name
-                descriptionTextField.text = userProfile.description
+                nameTextField.text = appUser.name
+                descriptionTextField.text = appUser.userDescription
             } else {
                 editButton.setTitle("Редактировать", for: .normal)
                 updateProfileInfo()
             }
         }
+    }
+    
+    
+   
+    @IBAction func saveButtonTapped(_ sender: UIButton) {
+        saveUserProfile()
     }
     
     
@@ -64,15 +67,7 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
         saveButtonsControl()
     }
     
-    @IBAction func GCDButtonTapped(_ sender: UIButton) {
-        selectedDataManager = gcdDataManager
-        saveUserProfile()
-    }
-    
-    @IBAction func operationButtonTapped(_ sender: UIButton) {
-        selectedDataManager = operationDataManager
-        saveUserProfile()
-    }
+   
     @IBAction func editButtonTapped(_ sender: UIButton) {
         isEditingProfile = !isEditingProfile
     }
@@ -91,7 +86,6 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
     
     
     @IBAction func editImageAction(_ sender: UITapGestureRecognizer) {
-        print("Выбери изображение профиля")
         
         let alertController = UIAlertController(title: "Выберите изображение для профиля", message: "", preferredStyle: .actionSheet)
         let addPhotoAction = UIAlertAction(title: "Установить из галереи", style: .default) { (action: UIAlertAction) in
@@ -135,9 +129,21 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupViews()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard(gesture:)))
+        view.addGestureRecognizer(tapGesture)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown), name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHidden), name: UIResponder.keyboardWillHideNotification, object: nil)
+        loadUserProfile()
+        
+    }
+    
+    func setupViews (){
         self.profileImageView.layer.masksToBounds = true
         self.editImageButton.layer.masksToBounds = true
         self.editButton.layer.masksToBounds = true
+        self.saveUsingCoreData.layer.masksToBounds = true
         
         self.profileImageView.layer.cornerRadius = 40.0
         
@@ -148,13 +154,8 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
         
         self.editButton.layer.cornerRadius = 15.0
         self.editButton.layer.borderWidth = 1.0
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard(gesture:)))
-        view.addGestureRecognizer(tapGesture)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown), name: UIResponder.keyboardDidShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHidden), name: UIResponder.keyboardWillHideNotification, object: nil)
-        loadUserProfile()
-        
+        self.saveUsingCoreData.layer.cornerRadius = 15
+        self.saveUsingCoreData.layer.borderWidth = 1.0
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -170,17 +171,15 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
         self.profileImageView.image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage
         self.profileImageView.contentMode = UIView.ContentMode.scaleAspectFill
         self.profileImageView.clipsToBounds = true
-        GCDButton.isEnabled = true
-        operationButton.isEnabled = true
+        saveUsingCoreData.isEnabled = true
         isPhotoSelected = true
         dismiss(animated: true, completion: nil)
     }
     
     private func saveButtonsControl() {
-        if (!isSavingData && (nameTextField.text != "") && ((nameTextField.text != userProfile.name) || (descriptionTextField.text != userProfile.description || (profileImageView.image! != userProfile.userImage)))) {
+        if (!isSavingData && (nameTextField.text != "") && ((nameTextField.text != appUser.name) || (descriptionTextField.text != appUser.userDescription || (profileImageView.image!.jpegData(compressionQuality: 1.0) != appUser.image)))) {
             
-            GCDButton.isEnabled = true
-            operationButton.isEnabled = true
+            saveUsingCoreData.isEnabled = true
         }
     }
     
@@ -190,13 +189,13 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
     
     private func loadUserProfile() {
         editButton.isHidden = true
-        selectedDataManager = operationDataManager
         activityIndicatorView.startAnimating()
-        gcdDataManager.getProfile { (profile) in
-            self.userProfile = profile
+        storageManager.readData { (appUser) in
+            self.appUser = appUser
             self.activityIndicatorView.stopAnimating()
             self.activityIndicatorView.isHidden = true
             self.editButton.isHidden = false
+            self.isPhotoSelected = UIImage(named: "placeholder-user")!.jpegData(compressionQuality: 1.0) != self.appUser.image
             self.updateProfileInfo()
         }
     }
@@ -204,14 +203,14 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
     
     private func saveUserProfile() {
         isSavingData = true
-        GCDButton.isEnabled = false
-        operationButton.isEnabled = false
+        saveUsingCoreData.isEnabled = false
         activityIndicatorView.isHidden = false
         activityIndicatorView.startAnimating()
-        let newProfile = UserProfile(name: nameTextField.text!, description: descriptionTextField.text!, userImage: profileImageView.image!)
-        selectedDataManager.saveProfile(new: newProfile, old: userProfile) { (error) in
+        appUser.name = nameTextField.text
+        appUser.userDescription = descriptionTextField.text
+        appUser.image = isPhotoSelected ? profileImageView.image?.jpegData(compressionQuality: 1.0) : UIImage(named: "placeholder-user")?.jpegData(compressionQuality: 1.0)
+        storageManager.saveData{ (error) in
             if error == nil {
-                self.userProfile = newProfile
                 let alert = UIAlertController(title: "Данные сохранены", message: nil, preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "Ок", style: .default) { action in
                     if self.isEditingProfile {
@@ -234,16 +233,15 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
             }
             self.activityIndicatorView.stopAnimating()
             self.activityIndicatorView.isHidden = true
-            self.GCDButton.isEnabled = true
-            self.operationButton.isEnabled = true
+            self.saveUsingCoreData.isEnabled = true
             self.isSavingData = false
         }
     }
     
     private func updateProfileInfo() {
-        nameLabel.text = userProfile.name
-        descriptionLabel.text = userProfile.description
-        profileImageView.image = userProfile.userImage
+        nameLabel.text = appUser.name
+        descriptionLabel.text = appUser.userDescription
+        profileImageView.image = UIImage(data: appUser.image!)
     }
     
     
@@ -262,7 +260,6 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
         scrollView.contentInset = UIEdgeInsets.zero
         scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
     }
-    
 
 }
 

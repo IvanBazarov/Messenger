@@ -456,22 +456,6 @@
                                                     <action selector="descriptionEditingEnd:" destination="EgB-9n-yBi" eventType="editingDidEnd" id="KV2-rk-TQJ"/>
                                                 </connections>
                                             </textField>
-                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z2j-tz-ghy">
-                                                <rect key="frame" x="27" y="414" width="117" height="30"/>
-                                                <color key="backgroundColor" red="0.98640993450000003" green="0.99953407049999998" blue="0.1810254822" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" title="GCD"/>
-                                                <connections>
-                                                    <action selector="GCDButtonTapped:" destination="EgB-9n-yBi" eventType="touchUpInside" id="LPf-ys-Oob"/>
-                                                </connections>
-                                            </button>
-                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e1e-aB-7Db">
-                                                <rect key="frame" x="176" y="414" width="117" height="30"/>
-                                                <color key="backgroundColor" red="0.98640993450000003" green="0.99953407049999998" blue="0.1810254822" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal" title="Operation"/>
-                                                <connections>
-                                                    <action selector="operationButtonTapped:" destination="EgB-9n-yBi" eventType="touchUpInside" id="jrh-qN-Dyc"/>
-                                                </connections>
-                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EEi-iC-i1k">
                                                 <rect key="frame" x="16" y="455" width="288" height="39"/>
                                                 <constraints>
@@ -499,18 +483,29 @@
                                                     <action selector="editImageAction:" destination="EgB-9n-yBi" eventType="touchUpInside" id="BqP-J5-Uyp"/>
                                                 </connections>
                                             </button>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AHC-5n-pRy">
+                                                <rect key="frame" x="16" y="399" width="288" height="38"/>
+                                                <color key="backgroundColor" red="0.98640993450000003" green="0.99953407049999998" blue="0.1810254822" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <inset key="contentEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                                <state key="normal" title="Save Data"/>
+                                                <connections>
+                                                    <action selector="saveButtonTapped:" destination="EgB-9n-yBi" eventType="touchUpInside" id="WM3-oP-4vE"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="704-l7-r2h" secondAttribute="trailing" constant="16" id="0cY-Px-lRo"/>
-                                            <constraint firstAttribute="trailing" secondItem="e1e-aB-7Db" secondAttribute="trailing" constant="27" id="53B-bd-8Ff"/>
+                                            <constraint firstAttribute="trailing" secondItem="AHC-5n-pRy" secondAttribute="trailing" constant="16" id="3ig-0l-Q22"/>
                                             <constraint firstItem="HGq-dX-oQZ" firstAttribute="top" secondItem="HPe-y3-g4h" secondAttribute="bottom" constant="15" id="6Wz-dK-F11"/>
                                             <constraint firstItem="EEi-iC-i1k" firstAttribute="leading" secondItem="iVF-Jf-xvZ" secondAttribute="leading" constant="16" id="AmC-uw-mJo"/>
                                             <constraint firstItem="Mkx-r4-bNJ" firstAttribute="bottom" secondItem="Vfi-An-7EE" secondAttribute="bottom" id="BVU-TK-LrO"/>
                                             <constraint firstItem="HPe-y3-g4h" firstAttribute="centerX" secondItem="iVF-Jf-xvZ" secondAttribute="centerX" id="EXy-do-QJg"/>
+                                            <constraint firstItem="EEi-iC-i1k" firstAttribute="top" secondItem="AHC-5n-pRy" secondAttribute="bottom" constant="18" id="FRX-mV-8aZ"/>
                                             <constraint firstAttribute="trailing" secondItem="EEi-iC-i1k" secondAttribute="trailing" constant="16" id="Fk5-UB-i8m"/>
                                             <constraint firstItem="Mkx-r4-bNJ" firstAttribute="trailing" secondItem="Vfi-An-7EE" secondAttribute="trailing" id="GNM-6V-Lps"/>
                                             <constraint firstAttribute="trailing" secondItem="Vfi-An-7EE" secondAttribute="trailing" constant="35" id="Hpf-hZ-OY4"/>
+                                            <constraint firstItem="AHC-5n-pRy" firstAttribute="leading" secondItem="iVF-Jf-xvZ" secondAttribute="leading" constant="16" id="Nfe-h0-1a0"/>
                                             <constraint firstItem="Vfi-An-7EE" firstAttribute="top" secondItem="iVF-Jf-xvZ" secondAttribute="top" constant="8" id="OMQ-QP-UCV"/>
                                             <constraint firstItem="Mhb-Xz-N14" firstAttribute="top" secondItem="ztX-Ei-M20" secondAttribute="bottom" constant="12" id="Oez-bf-wkP"/>
                                             <constraint firstItem="704-l7-r2h" firstAttribute="top" secondItem="Mhb-Xz-N14" secondAttribute="bottom" constant="8" id="OnP-ZS-RJt"/>
@@ -518,16 +513,11 @@
                                             <constraint firstItem="ztX-Ei-M20" firstAttribute="top" secondItem="HGq-dX-oQZ" secondAttribute="bottom" constant="10" id="TLC-hJ-on4"/>
                                             <constraint firstItem="ztX-Ei-M20" firstAttribute="leading" secondItem="iVF-Jf-xvZ" secondAttribute="leading" constant="16" id="WGO-Et-BjL"/>
                                             <constraint firstItem="Vfi-An-7EE" firstAttribute="width" secondItem="Vfi-An-7EE" secondAttribute="height" multiplier="1:1" id="XfQ-kP-cwA"/>
-                                            <constraint firstItem="Z2j-tz-ghy" firstAttribute="leading" secondItem="iVF-Jf-xvZ" secondAttribute="leading" constant="27" id="Ygv-IV-6Zc"/>
-                                            <constraint firstAttribute="bottom" secondItem="Z2j-tz-ghy" secondAttribute="bottom" constant="60" id="YiK-EQ-gqp"/>
                                             <constraint firstItem="704-l7-r2h" firstAttribute="leading" secondItem="iVF-Jf-xvZ" secondAttribute="leading" constant="16" id="Zh5-ZJ-FBN"/>
                                             <constraint firstItem="HGq-dX-oQZ" firstAttribute="leading" secondItem="iVF-Jf-xvZ" secondAttribute="leading" constant="16" id="gCZ-ac-03l"/>
                                             <constraint firstItem="Mhb-Xz-N14" firstAttribute="leading" secondItem="iVF-Jf-xvZ" secondAttribute="leading" constant="16" id="h9L-fT-fLw"/>
-                                            <constraint firstItem="e1e-aB-7Db" firstAttribute="leading" relation="lessThanOrEqual" secondItem="Z2j-tz-ghy" secondAttribute="trailing" constant="32" id="hcs-2b-xn1"/>
                                             <constraint firstAttribute="trailing" secondItem="HGq-dX-oQZ" secondAttribute="trailing" constant="16" id="i5e-ki-vTv"/>
                                             <constraint firstItem="Vfi-An-7EE" firstAttribute="leading" secondItem="iVF-Jf-xvZ" secondAttribute="leading" constant="35" id="jQ5-ZL-NyT"/>
-                                            <constraint firstItem="e1e-aB-7Db" firstAttribute="width" secondItem="Z2j-tz-ghy" secondAttribute="width" id="rwN-Td-zjQ"/>
-                                            <constraint firstAttribute="bottom" secondItem="e1e-aB-7Db" secondAttribute="bottom" constant="60" id="tEH-oP-hmH"/>
                                             <constraint firstAttribute="bottom" secondItem="EEi-iC-i1k" secondAttribute="bottom" constant="10" id="u4S-eE-tTp"/>
                                             <constraint firstAttribute="trailing" secondItem="Mhb-Xz-N14" secondAttribute="trailing" constant="16" id="vAg-QN-ys2"/>
                                             <constraint firstAttribute="trailing" secondItem="ztX-Ei-M20" secondAttribute="trailing" constant="16" id="vFV-8S-4KO"/>
@@ -561,7 +551,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="GCDButton" destination="Z2j-tz-ghy" id="AgL-Rw-mQX"/>
                         <outlet property="activityIndicatorView" destination="HPe-y3-g4h" id="f4t-m8-yo6"/>
                         <outlet property="descriptionLabel" destination="Mhb-Xz-N14" id="SYb-Bz-dgM"/>
                         <outlet property="descriptionTextField" destination="704-l7-r2h" id="XHI-QH-kRK"/>
@@ -569,8 +558,8 @@
                         <outlet property="editImageButton" destination="Mkx-r4-bNJ" id="pu4-o5-BJ9"/>
                         <outlet property="nameLabel" destination="HGq-dX-oQZ" id="LMD-FN-CzH"/>
                         <outlet property="nameTextField" destination="ztX-Ei-M20" id="sar-cZ-Qm8"/>
-                        <outlet property="operationButton" destination="e1e-aB-7Db" id="Ddp-PZ-TcC"/>
                         <outlet property="profileImageView" destination="Vfi-An-7EE" id="k4q-Em-caX"/>
+                        <outlet property="saveUsingCoreData" destination="AHC-5n-pRy" id="JXy-pv-dcF"/>
                         <outlet property="scrollView" destination="WRK-Ml-xHZ" id="GiY-2b-ZYS"/>
                     </connections>
                 </viewController>

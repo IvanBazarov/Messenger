@@ -11,13 +11,17 @@ import Foundation
 class CommunicationManager: CommunicatorDelegate {
     
     static let shared = CommunicationManager()
-    var dataManager = GCDDataManager()
+    var storageManager = StorageManager()
     var communicator: MultipeerCommunicator!
     weak var delegate: CommunicationDelegate?
     
     private init() {
-        dataManager.getProfile { (profile) in
-            self.communicator = MultipeerCommunicator(profile: profile)
+        storageManager.readData { (appUser) in
+            guard let appUser = appUser else {
+                assert(false, "Can't browse users")
+                return
+            }
+            self.communicator = MultipeerCommunicator(profile: appUser)
             self.communicator.delegate = self
         }
     }

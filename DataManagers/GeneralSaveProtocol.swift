@@ -14,7 +14,7 @@ typealias CompletionProfileLoader = (UserProfile) -> Void
 protocol DataManager {
     
     func getProfile(completion: @escaping CompletionProfileLoader)
-    func saveProfile(new profile: UserProfile, old: UserProfile, completion: @escaping CompletionSaveHandler)
+    func saveProfile(new profile: AppUser, newName: String, newDescription: String, newImageData: Data, completion: @escaping CompletionSaveHandler)
 }
 
 enum ImageError: Error {

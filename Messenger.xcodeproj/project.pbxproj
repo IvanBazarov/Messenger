@@ -17,6 +17,7 @@
 		FE78F8572173D2B90086CBCD /* ThemesViewControllerSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE78F8562173D2B90086CBCD /* ThemesViewControllerSwift.swift */; };
 		FE7CF30C216A321500F4ECBF /* ConversationsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7CF30B216A321500F4ECBF /* ConversationsListViewController.swift */; };
 		FE7CF311216A376C00F4ECBF /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7CF30F216A376C00F4ECBF /* ConversationTableViewCell.swift */; };
+		FE7E1749218F2D8E00042541 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7E1748218F2D8E00042541 /* StorageManager.swift */; };
 		FE8A08CD216AA99800BCE9BF /* UserClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8A08CC216AA99800BCE9BF /* UserClass.swift */; };
 		FE9DB1662185F58D00CEB400 /* CommunicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9DB1652185F58D00CEB400 /* CommunicationManager.swift */; };
 		FE9DB1682185F62100CEB400 /* Communicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9DB1672185F62100CEB400 /* Communicator.swift */; };
@@ -26,6 +27,7 @@
 		FE9DB1702185FA4A00CEB400 /* MultiPeerCommunicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9DB16F2185FA4A00CEB400 /* MultiPeerCommunicator.swift */; };
 		FEA44811216A6D340042A9A2 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA44810216A6D330042A9A2 /* ConversationViewController.swift */; };
 		FEA44813216A742E0042A9A2 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA44812216A742E0042A9A2 /* ChatTableViewCell.swift */; };
+		FEB585202190AC21006D3961 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEB5851F2190AC21006D3961 /* AppUser.swift */; };
 		FECEA55B2157B63D0007FDF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECEA55A2157B63D0007FDF4 /* AppDelegate.swift */; };
 		FECEA5602157B63D0007FDF4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FECEA55E2157B63D0007FDF4 /* Main.storyboard */; };
 		FECEA5632157B63D0007FDF4 /* Messenger.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FECEA5612157B63D0007FDF4 /* Messenger.xcdatamodeld */; };
@@ -50,6 +52,7 @@
 		FE78F8562173D2B90086CBCD /* ThemesViewControllerSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesViewControllerSwift.swift; sourceTree = "<group>"; };
 		FE7CF30B216A321500F4ECBF /* ConversationsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsListViewController.swift; sourceTree = "<group>"; };
 		FE7CF30F216A376C00F4ECBF /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
+		FE7E1748218F2D8E00042541 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		FE8A08CC216AA99800BCE9BF /* UserClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserClass.swift; sourceTree = "<group>"; };
 		FE9DB1652185F58D00CEB400 /* CommunicationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunicationManager.swift; sourceTree = "<group>"; };
 		FE9DB1672185F62100CEB400 /* Communicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Communicator.swift; sourceTree = "<group>"; };
@@ -59,6 +62,7 @@
 		FE9DB16F2185FA4A00CEB400 /* MultiPeerCommunicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPeerCommunicator.swift; sourceTree = "<group>"; };
 		FEA44810216A6D330042A9A2 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		FEA44812216A742E0042A9A2 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
+		FEB5851F2190AC21006D3961 /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppUser.swift; path = UserModel/AppUser.swift; sourceTree = SOURCE_ROOT; };
 		FECEA5572157B63D0007FDF4 /* Messenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Messenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FECEA55A2157B63D0007FDF4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FECEA55F2157B63D0007FDF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -109,6 +113,8 @@
 		FECA92C5217CFC2500EF9710 /* UserModel */ = {
 			isa = PBXGroup;
 			children = (
+				FECEA5612157B63D0007FDF4 /* Messenger.xcdatamodeld */,
+				FEB5851F2190AC21006D3961 /* AppUser.swift */,
 				FE8A08CC216AA99800BCE9BF /* UserClass.swift */,
 				FE1F109C217CC2BA00694AA2 /* UserProfile.swift */,
 			);
@@ -135,6 +141,7 @@
 		FECA92C8217CFCF400EF9710 /* DataManagers */ = {
 			isa = PBXGroup;
 			children = (
+				FE7E1748218F2D8E00042541 /* StorageManager.swift */,
 				FE1F109E217CD59F00694AA2 /* AsyncOperation.swift */,
 				FE1F109A217CC26000694AA2 /* GeneralSaveProtocol.swift */,
 				FE1F1096217CC0CF00694AA2 /* GCDDataManager.swift */,
@@ -150,6 +157,8 @@
 				FECA92C6217CFC6800EF9710 /* ThemesControllers */,
 				FE9DB1642185F55D00CEB400 /* Communication */,
 				FECEA5592157B63D0007FDF4 /* Messenger */,
+				FEEA934E2190D8DC00D8F74F /* Conversations */,
+				FEEA934D2190D8A800D8F74F /* CustomTableViewCells */,
 				FECA92C5217CFC2500EF9710 /* UserModel */,
 				FECA92C8217CFCF400EF9710 /* DataManagers */,
 				FECEA5582157B63D0007FDF4 /* Products */,
@@ -169,18 +178,31 @@
 			children = (
 				FE35D38E21737ADC00853120 /* Messenger-Bridging-Header.h */,
 				FECEA55A2157B63D0007FDF4 /* AppDelegate.swift */,
-				FE7CF30B216A321500F4ECBF /* ConversationsListViewController.swift */,
-				FEA44810216A6D330042A9A2 /* ConversationViewController.swift */,
-				FE7CF30F216A376C00F4ECBF /* ConversationTableViewCell.swift */,
 				FE08E15321611D7700007D7C /* ProfileViewController.swift */,
-				FEA44812216A742E0042A9A2 /* ChatTableViewCell.swift */,
 				FECEA5642157B63D0007FDF4 /* Assets.xcassets */,
 				FECEA55E2157B63D0007FDF4 /* Main.storyboard */,
 				FECEA5662157B63D0007FDF4 /* LaunchScreen.storyboard */,
 				FECEA5692157B63D0007FDF4 /* Info.plist */,
-				FECEA5612157B63D0007FDF4 /* Messenger.xcdatamodeld */,
 			);
 			path = Messenger;
+			sourceTree = "<group>";
+		};
+		FEEA934D2190D8A800D8F74F /* CustomTableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				FE7CF30F216A376C00F4ECBF /* ConversationTableViewCell.swift */,
+				FEA44812216A742E0042A9A2 /* ChatTableViewCell.swift */,
+			);
+			path = CustomTableViewCells;
+			sourceTree = "<group>";
+		};
+		FEEA934E2190D8DC00D8F74F /* Conversations */ = {
+			isa = PBXGroup;
+			children = (
+				FE7CF30B216A321500F4ECBF /* ConversationsListViewController.swift */,
+				FEA44810216A6D330042A9A2 /* ConversationViewController.swift */,
+			);
+			path = Conversations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,6 +280,7 @@
 			files = (
 				FE9DB1702185FA4A00CEB400 /* MultiPeerCommunicator.swift in Sources */,
 				FECEA55B2157B63D0007FDF4 /* AppDelegate.swift in Sources */,
+				FE7E1749218F2D8E00042541 /* StorageManager.swift in Sources */,
 				FE1F109B217CC26000694AA2 /* GeneralSaveProtocol.swift in Sources */,
 				FE7CF30C216A321500F4ECBF /* ConversationsListViewController.swift in Sources */,
 				FEA44811216A6D340042A9A2 /* ConversationViewController.swift in Sources */,
@@ -266,6 +289,7 @@
 				FE1F1097217CC0CF00694AA2 /* GCDDataManager.swift in Sources */,
 				FE1F1099217CC0E100694AA2 /* OperationDataManager..swift in Sources */,
 				FE35D38C2173720A00853120 /* ThemesViewController.m in Sources */,
+				FEB585202190AC21006D3961 /* AppUser.swift in Sources */,
 				FECEA5632157B63D0007FDF4 /* Messenger.xcdatamodeld in Sources */,
 				FE9DB1662185F58D00CEB400 /* CommunicationManager.swift in Sources */,
 				FE9DB16C2185F75A00CEB400 /* CommunicationDelegate.swift in Sources */,
