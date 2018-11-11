@@ -1,0 +1,9 @@
+disabled_rules: # rule identifiers to exclude from running
+- colon
+- force_cast
+- line_length
+- control_statement
+- identifier_name
+- class_delegate_protocol
+- weak_delegate
+- type_name
