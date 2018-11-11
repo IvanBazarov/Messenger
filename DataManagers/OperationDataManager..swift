@@ -12,14 +12,12 @@ struct OperationDataManager {
     var documentsDirectory: URL
     var archiveURL: URL
     let operationQueue = OperationQueue()
-    
     init() {
         operationQueue.qualityOfService = .userInitiated
         operationQueue.maxConcurrentOperationCount = 1
         documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         archiveURL = documentsDirectory.appendingPathComponent("user_profile").appendingPathExtension("plist")
     }
-    
     func saveProfile(new profile: UserProfile, old: UserProfile, completion: @escaping CompletionSaveHandler) {
         let saveOperation = SaveProfileOperation()
         saveOperation.archiveURL = archiveURL
@@ -28,7 +26,6 @@ struct OperationDataManager {
         saveOperation.oldProfile = old
         operationQueue.addOperation(saveOperation)
     }
-    
     func getProfile(completion: @escaping CompletionProfileLoader) {
         let loadOperation = ProfileLoadingOperation()
         loadOperation.archiveURL = archiveURL
@@ -41,7 +38,6 @@ class ProfileLoadingOperation: Operation {
     var profile: UserProfile!
     var archiveURL: URL!
     var completionHandler: CompletionProfileLoader!
-    
     override func main() {
         let name = UserDefaults.standard.string(forKey: "user_name") ?? ""
         let description = UserDefaults.standard.string(forKey: "user_description") ?? "Нет данных в профиле"
@@ -61,7 +57,6 @@ class SaveProfileOperation: Operation {
     var oldProfile: UserProfile!
     var completionHandler: CompletionSaveHandler!
     var archiveURL: URL!
-    
     override func main() {
         if newProfile.name != oldProfile.name {
             UserDefaults.standard.set(newProfile.name, forKey: "user_name")
@@ -72,7 +67,7 @@ class SaveProfileOperation: Operation {
         if newProfile.userImage.jpegData(compressionQuality: 1.0) != oldProfile.userImage.jpegData(compressionQuality: 1.0) {
             guard let imageData = newProfile.userImage.jpegData(compressionQuality: 1.0) else {
                 OperationQueue.main.addOperation {
-                    self.completionHandler(ImageError.convertDataError)
+                    self.completionHandler(SavingErrors.convertDataError)
                 }
                 return
             }

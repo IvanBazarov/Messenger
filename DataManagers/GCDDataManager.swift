@@ -9,34 +9,28 @@
 import Foundation
 
 struct GCDDataManager {
-    
     let syncQueue = DispatchQueue(label: "com.IvanBazarov", qos: .userInitiated)
     let documentsDirectory: URL
     let archiveURL: URL
-    
     init() {
         documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         archiveURL = documentsDirectory.appendingPathComponent("user_profile").appendingPathExtension("plist")
     }
-    
     func saveNameWith(_ name: String) {
         UserDefaults.standard.set(name, forKey: "user_name")
     }
-    
     func saveDescriptionWith(_ description: String) {
         UserDefaults.standard.set(description, forKey: "user_description")
     }
-    
     func saveImageWith(_ image: UIImage) throws {
-        guard let imageData = image.jpegData(compressionQuality: 1.0) else { throw ImageError.convertDataError }
+        guard let imageData = image.jpegData(compressionQuality: 1.0) else { throw SavingErrors.convertDataError }
         do {
             try imageData.write(to: archiveURL, options: .noFileProtection)
         } catch let error {
             throw error
         }
     }
-    
-    func getProfile(completion: @escaping CompletionProfileLoader){
+    func getProfile(completion: @escaping CompletionProfileLoader) {
         syncQueue.async {
             let name = UserDefaults.standard.string(forKey: "user_name") ?? ""
             let description = UserDefaults.standard.string(forKey: "user_description") ?? "Нет данных в профиле"
@@ -52,7 +46,6 @@ struct GCDDataManager {
             }
         }
     }
-    
     func saveProfile(old: UserProfile, new profile: UserProfile, completion: @escaping CompletionSaveHandler) {
         syncQueue.async {
             if profile.name != old.name {
@@ -76,5 +69,5 @@ struct GCDDataManager {
             }
         }
     }
-    
+
 }

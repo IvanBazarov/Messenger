@@ -17,12 +17,9 @@ protocol ConversationCellConfiguration {
 }
 
 class ConversationTableViewCell: UITableViewCell, ConversationCellConfiguration {
-    
-
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
-    
     private func setMessageFont() {
         if message != nil {
             if hasUnreadMessages {
@@ -34,12 +31,11 @@ class ConversationTableViewCell: UITableViewCell, ConversationCellConfiguration 
             messageLabel.font = .italicSystemFont(ofSize: 14.0)
         }
     }
-    
     var name: String? {
         didSet {
             if name == "" {
                 nameLabel.text = "No name"
-            }else {
+            } else {
                 nameLabel.text = name
             }
         }

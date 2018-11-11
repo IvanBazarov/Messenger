@@ -10,7 +10,6 @@ import UIKit
 import CoreData
 
 class ProfileViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-   
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var editImageButton: UIButton!
     @IBOutlet weak var editButton: UIButton!
@@ -21,8 +20,8 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
     @IBOutlet var nameTextField: UITextField!
     @IBOutlet var descriptionTextField: UITextField!
     @IBOutlet var activityIndicatorView: UIActivityIndicatorView!
-    var selectedDataManager: DataManager!
-    var appUser: AppUser!
+    var selectedDataManager: DataManager! = StorageManager()
+    var profile: UserProfile!
     var storageManager = StorageManager()
     var isSavingData: Bool = false
     var isPhotoSelected: Bool = false
@@ -39,72 +38,53 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
                 descriptionLabel.text = "О себе"
                 nameTextField.placeholder = "Укажите свое имя"
                 descriptionTextField.placeholder = "Расскажите о себе"
-                nameTextField.text = appUser.name
-                descriptionTextField.text = appUser.userDescription
+                nameTextField.text = profile.name
+                descriptionTextField.text = profile.description
             } else {
                 editButton.setTitle("Редактировать", for: .normal)
                 updateProfileInfo()
             }
         }
     }
-    
-    
-   
     @IBAction func saveButtonTapped(_ sender: UIButton) {
         saveUserProfile()
     }
-    
-    
     @IBAction func dismissView(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-    
     @IBAction func nameEditingEnd(_ sender: UITextField) {
         saveButtonsControl()
     }
-    
     @IBAction func descriptionEditingEnd(_ sender: UITextField) {
         saveButtonsControl()
     }
-    
-   
     @IBAction func editButtonTapped(_ sender: UIButton) {
         isEditingProfile = !isEditingProfile
     }
-    
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)   {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         //print(self.editImageButton.frame)
         //Невозможно распечатать свойство frame т.к в данном методе эта кнопка еще не инициализирована и содержит nil, что приводит к краху приложения при попытке ее распечатать
-        
     }
-    
-    
     @IBAction func editImageAction(_ sender: UITapGestureRecognizer) {
-        
         let alertController = UIAlertController(title: "Выберите изображение для профиля", message: "", preferredStyle: .actionSheet)
         let addPhotoAction = UIAlertAction(title: "Установить из галереи", style: .default) { (action: UIAlertAction) in
-            
             if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
                 let imagePicker = UIImagePickerController()
                 imagePicker.delegate = self
                 imagePicker.allowsEditing = false
                 imagePicker.sourceType = .photoLibrary
-                
                 self.present(imagePicker, animated: true, completion: nil)
             }
         }
         let makePhotoAction = UIAlertAction(title: "Сделать фото", style: .default) { (action:UIAlertAction) in
-            
             if UIImagePickerController.isSourceTypeAvailable(.camera) {
                 let imagePicker = UIImagePickerController()
                 imagePicker.delegate = self
-                imagePicker.sourceType = .camera;
+                imagePicker.sourceType = .camera
                 imagePicker.allowsEditing = false
                 self.present(imagePicker, animated: true, completion: nil)
             }
@@ -114,7 +94,6 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
         alertController.addAction(addPhotoAction)
         alertController.addAction(makePhotoAction)
         alertController.addAction(cancelAction)
-        
         if isPhotoSelected {
             let deletePhotoAlertAction = UIAlertAction(title: "Удалить фотографию", style: .destructive) {(action: UIAlertAction) in
                 self.profileImageView.image = UIImage(named: "placeholder-user")
@@ -126,38 +105,35 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
 
         self.present(alertController, animated: true, completion: nil)
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard(gesture:)))
         view.addGestureRecognizer(tapGesture)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown), name: UIResponder.keyboardDidShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHidden), name: UIResponder.keyboardWillHideNotification, object: nil)
         loadUserProfile()
-        
     }
-    
-    func setupViews (){
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.profileImageView.layer.cornerRadius = 40
+    }
+    func setupViews() {
         self.profileImageView.layer.masksToBounds = true
         self.editImageButton.layer.masksToBounds = true
         self.editButton.layer.masksToBounds = true
         self.saveUsingCoreData.layer.masksToBounds = true
-        
         self.profileImageView.layer.cornerRadius = 40.0
-        
+        self.profileImageView.contentMode = .scaleAspectFill
         self.editImageButton.imageView?.contentMode = .scaleAspectFit
         self.editImageButton.imageEdgeInsets = UIEdgeInsets.init(top: 17.0, left: 17.0, bottom: 17.0, right: 17.0)
         self.editImageButton.layer.cornerRadius = self.editImageButton.frame.size.width / 2
         self.editImageButton.backgroundColor = UIColor(red: 0x3F, green: 0x78, blue: 0xF0)
-        
         self.editButton.layer.cornerRadius = 15.0
         self.editButton.layer.borderWidth = 1.0
         self.saveUsingCoreData.layer.cornerRadius = 15
         self.saveUsingCoreData.layer.borderWidth = 1.0
     }
-    
     override func viewDidAppear(_ animated: Bool) {
         //В данном случае "frame" отличается, потому что метод viewDidAppear вызывается после вычисления позиции и размера всех вьюх, а метод viewDidLoad - до.
     }
@@ -165,7 +141,6 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
         self.profileImageView.image = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage
@@ -175,42 +150,37 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
         isPhotoSelected = true
         dismiss(animated: true, completion: nil)
     }
-    
     private func saveButtonsControl() {
-        if (!isSavingData && (nameTextField.text != "") && ((nameTextField.text != appUser.name) || (descriptionTextField.text != appUser.userDescription || (profileImageView.image!.jpegData(compressionQuality: 1.0) != appUser.image)))) {
-            
+        if (!isSavingData && (nameTextField.text != "") && ((nameTextField.text != profile.name) || (descriptionTextField.text != profile.description || (profileImageView.image!.jpegData(compressionQuality: 1.0) != profile.userImage.jpegData(compressionQuality: 1.0))))) {
             saveUsingCoreData.isEnabled = true
         }
     }
-    
     @objc func hideKeyboard(gesture: UITapGestureRecognizer) {
         view.endEditing(true)
     }
-    
     private func loadUserProfile() {
         editButton.isHidden = true
         activityIndicatorView.startAnimating()
-        storageManager.readData { (appUser) in
-            self.appUser = appUser
+        selectedDataManager.readData { (profile) in
+            self.profile = profile
             self.activityIndicatorView.stopAnimating()
             self.activityIndicatorView.isHidden = true
             self.editButton.isHidden = false
-            self.isPhotoSelected = UIImage(named: "placeholder-user")!.jpegData(compressionQuality: 1.0) != self.appUser.image
+            self.isPhotoSelected = UIImage(named: "placeholder-user")!.jpegData(compressionQuality: 1.0) != profile.userImage.jpegData(compressionQuality: 1.0)
             self.updateProfileInfo()
         }
     }
 
-    
     private func saveUserProfile() {
         isSavingData = true
         saveUsingCoreData.isEnabled = false
         activityIndicatorView.isHidden = false
         activityIndicatorView.startAnimating()
-        appUser.name = nameTextField.text
-        appUser.userDescription = descriptionTextField.text
-        appUser.image = isPhotoSelected ? profileImageView.image?.jpegData(compressionQuality: 1.0) : UIImage(named: "placeholder-user")?.jpegData(compressionQuality: 1.0)
-        storageManager.saveData{ (error) in
+        guard let name = nameTextField.text, let description = descriptionTextField.text, let image = profileImageView.image else { return }
+        let newProfile = UserProfile(name: name, description: description, userImage: image)
+        selectedDataManager.saveData(newProfile: newProfile, oldProfile: profile) { (error) in
             if error == nil {
+                self.profile = newProfile
                 let alert = UIAlertController(title: "Данные сохранены", message: nil, preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "Ок", style: .default) { action in
                     if self.isEditingProfile {
@@ -237,15 +207,11 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
             self.isSavingData = false
         }
     }
-    
     private func updateProfileInfo() {
-        nameLabel.text = appUser.name
-        descriptionLabel.text = appUser.userDescription
-        profileImageView.image = UIImage(data: appUser.image!)
+        nameLabel.text = profile.name
+        descriptionLabel.text = profile.description
+        profileImageView.image = profile.userImage
     }
-    
-    
-    
     @objc private func keyboardWasShown(_ notification: NSNotification) {
         guard let info = notification.userInfo, let keyboardFrameValue = info[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue else { return }
         let keyboardFrame = keyboardFrameValue.cgRectValue
@@ -254,8 +220,6 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
         scrollView.contentInset = keyboardInsets
         scrollView.scrollIndicatorInsets = keyboardInsets
     }
-    
-    
     @objc private func keyboardWillHidden() {
         scrollView.contentInset = UIEdgeInsets.zero
         scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
@@ -268,10 +232,8 @@ extension UIColor {
         assert(red >= 0 && red <= 255, "Invalid red component")
         assert(green >= 0 && green <= 255, "Invalid green component")
         assert(blue >= 0 && blue <= 255, "Invalid blue component")
-        
         self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
     }
-    
     convenience init(rgb: Int) {
         self.init(
             red: (rgb >> 16) & 0xFF,
@@ -280,8 +242,6 @@ extension UIColor {
         )
     }
 }
-
-
 
 // Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
@@ -292,4 +252,3 @@ fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [U
 fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
 	return input.rawValue
 }
-

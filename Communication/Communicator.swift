@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias messageHandler = (_ succes: Bool, _ error: Error?) -> ()
+typealias messageHandler = (_ succes: Bool, _ error: Error?) -> Void
 
 protocol Communicator {
     func sendMessage(string: String, to userId: String, completionHandler: messageHandler?)
