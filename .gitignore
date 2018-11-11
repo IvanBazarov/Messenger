@@ -10,3 +10,4 @@ xcuserdata/
 ## Other
 *.xccheckout
 *.xcscmblueprint
+Pods/
