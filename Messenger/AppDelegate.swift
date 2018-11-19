@@ -13,11 +13,17 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    private let rootAssembly = RootAssembly()
+    
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         return true
     }
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         setUpSavedTheme()
+        guard let rootVC = window?.rootViewController as? UINavigationController,
+            let conversationVC = rootVC.topViewController as? ConversationsListViewController else { return true }
+        conversationVC.assembly = rootAssembly.presentationAssembly
+        conversationVC.conversationListInteractor = rootAssembly.presentationAssembly.getConversationListInteractor()
         return true
     }
     func setUpSavedTheme() {
@@ -25,7 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().backgroundColor = theme
     }
     func applicationWillResignActive(_ application: UIApplication) {
-        CommunicationManager.shared.stopMultipeerWithUsers()
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -35,8 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        CommunicationManager.shared.didStartSessions()
-        CommunicationManager.shared.startMultipeerWithUsers()
+        let communicationManager = rootAssembly.presentationAssembly.serviceAssembly.communicationManager
+        communicationManager.didStartSessions()
     }
 
 }

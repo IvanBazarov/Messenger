@@ -79,7 +79,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="user" id="IOf-DG-G0j">
                             <connections>
-                                <segue destination="hIc-xi-B7h" kind="presentation" id="wKW-BM-BVe"/>
+                                <segue destination="hIc-xi-B7h" kind="presentation" identifier="showProfile" id="wKW-BM-BVe"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -94,7 +94,7 @@
         <!--Conversation View Controller-->
         <scene sceneID="QT2-cr-Aom">
             <objects>
-                <viewController id="Uv9-cQ-Lao" customClass="ConversationViewController" customModule="Messenger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="convVC" id="Uv9-cQ-Lao" customClass="ConversationViewController" customModule="Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7eT-uK-y6G">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
