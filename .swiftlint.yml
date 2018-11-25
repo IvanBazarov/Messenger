@@ -6,4 +6,3 @@ disabled_rules: # rule identifiers to exclude from running
 - class_delegate_protocol
 - weak_delegate
 - type_name
-- trailing_whitespace

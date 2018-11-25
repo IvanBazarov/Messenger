@@ -11,7 +11,6 @@ import CoreData
 
 class StorageManager: ProfileDataManager {
     private let coreDataStack: CoreDataStack
-    
     init(coreDataStack: CoreDataStack) {
         self.coreDataStack = coreDataStack
     }

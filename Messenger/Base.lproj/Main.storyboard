@@ -561,11 +561,112 @@
                         <outlet property="profileImageView" destination="Vfi-An-7EE" id="k4q-Em-caX"/>
                         <outlet property="saveUsingCoreData" destination="AHC-5n-pRy" id="JXy-pv-dcF"/>
                         <outlet property="scrollView" destination="WRK-Ml-xHZ" id="GiY-2b-ZYS"/>
+                        <segue destination="0Ge-qx-HM3" kind="presentation" identifier="downloadImages" id="RSx-7K-fQF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cEk-t9-vCb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-105" y="867"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Yb7-pd-Yb5">
+            <objects>
+                <navigationController id="0Ge-qx-HM3" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="VyS-DO-c6U">
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="0bg-2g-tTc" kind="relationship" relationship="rootViewController" id="r9F-99-gFW"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xaQ-YA-628" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="917" y="866"/>
+        </scene>
+        <!--Интернет фото-->
+        <scene sceneID="Yul-uK-5Rm">
+            <objects>
+                <viewController id="0bg-2g-tTc" customClass="DownloadImageViewController" customModule="Messenger" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NOV-i6-NMl">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lwD-5Z-Bob">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="P9w-Hj-7S5">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="imageCell" id="Tpn-0t-QgO" userLabel="DownloadedImageCell" customClass="DownloadImageCollectionViewCell" customModule="Messenger" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder-user" translatesAutoresizingMaskIntoConstraints="NO" id="q5y-WP-LW5">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                </imageView>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="q5y-WP-LW5" firstAttribute="top" secondItem="Tpn-0t-QgO" secondAttribute="top" id="2k5-19-onu"/>
+                                            <constraint firstAttribute="trailing" secondItem="q5y-WP-LW5" secondAttribute="trailing" id="3ga-y4-f4G"/>
+                                            <constraint firstItem="q5y-WP-LW5" firstAttribute="leading" secondItem="Tpn-0t-QgO" secondAttribute="leading" id="FJj-eY-mQ7"/>
+                                            <constraint firstAttribute="bottom" secondItem="q5y-WP-LW5" secondAttribute="bottom" id="Mdy-Dg-wY0"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="downloadedImageView" destination="q5y-WP-LW5" id="Tiy-LY-8yP"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="0bg-2g-tTc" id="gEU-m6-Tp8"/>
+                                    <outlet property="delegate" destination="0bg-2g-tTc" id="UqB-0o-VmI"/>
+                                </connections>
+                            </collectionView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="eeh-YU-iyK">
+                                <rect key="frame" x="150" y="274" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="lwD-5Z-Bob" firstAttribute="leading" secondItem="MlZ-Yt-vgE" secondAttribute="leading" id="2Nd-2u-aEj"/>
+                            <constraint firstItem="eeh-YU-iyK" firstAttribute="centerY" secondItem="NOV-i6-NMl" secondAttribute="centerY" id="8v8-sc-V5i"/>
+                            <constraint firstItem="lwD-5Z-Bob" firstAttribute="bottom" secondItem="MlZ-Yt-vgE" secondAttribute="bottom" id="IzR-cG-9IQ"/>
+                            <constraint firstItem="lwD-5Z-Bob" firstAttribute="top" secondItem="MlZ-Yt-vgE" secondAttribute="top" id="Jtn-T1-bLk"/>
+                            <constraint firstItem="lwD-5Z-Bob" firstAttribute="trailing" secondItem="MlZ-Yt-vgE" secondAttribute="trailing" id="MhQ-A2-LAG"/>
+                            <constraint firstItem="eeh-YU-iyK" firstAttribute="centerX" secondItem="NOV-i6-NMl" secondAttribute="centerX" id="hoD-rz-4r2"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="MlZ-Yt-vgE"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Интернет фото" id="eMb-PF-Kac">
+                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="Ovv-Y7-Zjy">
+                            <connections>
+                                <action selector="refreshImagesList:" destination="0bg-2g-tTc" id="jcK-u0-szZ"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="60l-SG-VI6">
+                            <connections>
+                                <action selector="closeImageLoader:" destination="0bg-2g-tTc" id="RGh-Zt-3FI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="activityIndicatorView" destination="eeh-YU-iyK" id="YWZ-mD-fY3"/>
+                        <outlet property="collectionView" destination="lwD-5Z-Bob" id="tmh-p7-Tvq"/>
+                        <segue destination="UOj-4Z-kXk" kind="unwind" identifier="unwindToProfile" unwindAction="unwindToProfileWithSegue:" id="4bd-dp-JmU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gnr-vX-hEr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="UOj-4Z-kXk" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1788.75" y="864.08450704225356"/>
         </scene>
     </scenes>
     <resources>

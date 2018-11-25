@@ -10,7 +10,6 @@ import Foundation
 import MultipeerConnectivity
 
 class MultipeerCommunicator: NSObject, Communicator {
-    
     var myPeerId: MCPeerID!
     var browser: MCNearbyServiceBrowser!
     var advertiser: MCNearbyServiceAdvertiser!
@@ -29,7 +28,6 @@ class MultipeerCommunicator: NSObject, Communicator {
             }
         }
     }
-    
     func sendMessage(text: String, to userId: String, completionHandler: messageHandler?) {
         guard let session = sessionsDictionary[userId] else { return }
         let dictionaryToSend = ["eventType" : "TextMessage", "messageId" : generateMessageId(), "text" : text]

@@ -88,10 +88,14 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
                 self.present(imagePicker, animated: true, completion: nil)
             }
         }
+        let downloadImageAction = UIAlertAction(title: "Загрузить фото из интернета", style: .default) { (action: UIAlertAction) in
+            self.performSegue(withIdentifier: "downloadImages", sender: nil)
+        }
         let cancelAction = UIAlertAction(title: "Отмена", style: .cancel) { (action: UIAlertAction) in
         }
         alertController.addAction(addPhotoAction)
         alertController.addAction(makePhotoAction)
+        alertController.addAction(downloadImageAction)
         alertController.addAction(cancelAction)
         if isPhotoSelected {
             let deletePhotoAlertAction = UIAlertAction(title: "Удалить фотографию", style: .destructive) {(action: UIAlertAction) in
@@ -182,11 +186,11 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
             if error == nil {
                 let alert = UIAlertController(title: "Данные сохранены", message: nil, preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "Ок", style: .default) { action in
+                    UserDefaults.standard.set(name, forKey: "name")
                     if self.isEditingProfile {
                         self.isEditingProfile = false
                     } else {
                         self.updateProfileInfo()
-                        UserDefaults.standard.set(name, forKey: "name")
                     }
                 }
                 alert.addAction(okAction)
@@ -223,6 +227,24 @@ class ProfileViewController: UIViewController, UINavigationControllerDelegate, U
     @objc private func keyboardWillHidden() {
         scrollView.contentInset = UIEdgeInsets.zero
         scrollView.scrollIndicatorInsets = UIEdgeInsets.zero
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "downloadImages" {
+            guard let navigationController = segue.destination as? UINavigationController,
+                let loaderImageVC = navigationController.topViewController as? DownloadImageViewController else {
+                    super.prepare(for: segue, sender: sender)
+                    return
+            }
+            loaderImageVC.assembly = assembly
+            let imageLoaderInteractor = assembly.getImageLoaderInteractor()
+            imageLoaderInteractor.delegate = loaderImageVC
+            loaderImageVC.imageLoaderInteractor = imageLoaderInteractor
+        } else {
+            super.prepare(for: segue, sender: sender)
+        }
+    }
+    @IBAction func unwindToProfile(segue: UIStoryboardSegue) {
+        saveButtonsControl()
     }
 
 }

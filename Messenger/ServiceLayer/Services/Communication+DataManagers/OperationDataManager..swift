@@ -9,7 +9,6 @@
 import Foundation
 
 struct OperationDataManager: ProfileDataManager {
-    
     var documentsDirectory: URL
     var archiveURL: URL
     let operationQueue = OperationQueue()

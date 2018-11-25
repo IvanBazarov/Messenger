@@ -19,15 +19,15 @@ protocol IProfileInteractor {
 }
 class ProfileInteractor: IProfileInteractor {
     var profile: IProfile!
-    lazy var description: String = {
-        return profile.description
-    }()
-    lazy var name: String = {
+    var name: String {
         return profile.name
-    }()
-    lazy var imageData: Data = {
+    }
+    var description: String {
+        return profile.description
+    }
+    var imageData: Data {
         return profile.userImageData
-    }()
+    }
     var profileDataManager: ProfileDataManager
     init(profileDataManager: ProfileDataManager) {
         self.profileDataManager = profileDataManager

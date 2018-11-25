@@ -10,7 +10,6 @@ import Foundation
 import CoreData
 
 class CommunicationManager: ICommunicationManager {
-    
     weak var delegate: CommunicationIntegrator?
     var communicator: Communicator
     var coreDataStack: CoreDataStack

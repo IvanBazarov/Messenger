@@ -20,7 +20,6 @@ extension Conversation {
         conversation.convID = conversationId
         return conversation
     }
-    
     static func findConversationWith(conversationId: String, in context: NSManagedObjectContext, by conversationRequester: IConversationFetchRequester) -> Conversation? {
         let fetchConversationWithId = conversationRequester.fetchConversationWith(id: conversationId)
         do {
@@ -37,13 +36,11 @@ extension Conversation {
             return nil
         }
     }
-    
     static func findOrInsertConversationWith(conversationId: String, in context: NSManagedObjectContext, by conversationRequester: IConversationFetchRequester) -> Conversation {
         guard let conversation = Conversation.findConversationWith(conversationId: conversationId, in: context, by: conversationRequester) else { return Conversation.insertConversationWith(conversationId: conversationId, in: context)
         }
         return conversation
     }
-    
     static func findOnlineConversations(in context: NSManagedObjectContext, by conversationRequester: IConversationFetchRequester) -> [Conversation]? {
         let fetchRequest = conversationRequester.fetchOnlineConversations()
         do {

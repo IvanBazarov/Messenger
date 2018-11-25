@@ -12,6 +12,7 @@ protocol IPresentationAssembly {
     func getConversationListInteractor() -> IConversationListFetcher
     func getConversationInteractor() -> IConversationInteractor
     func getProfileInteractor() -> IProfileInteractor
+    func getImageLoaderInteractor() -> IImageLoaderInteractor
 }
 class PresentationAssembly: IPresentationAssembly {
     var serviceAssembly: IServiceAssembly
@@ -23,6 +24,10 @@ class PresentationAssembly: IPresentationAssembly {
     }
     func getProfileInteractor() -> IProfileInteractor {
         return ProfileInteractor(profileDataManager: serviceAssembly.profileDataManager)
+    }
+    func getImageLoaderInteractor() -> IImageLoaderInteractor {
+        return ImageLoaderInteractor(networkManager: serviceAssembly.imagesNetworkManager,
+                                     imageDownloadManager: serviceAssembly.imageDownloadManager)
     }
     init(serviceAssembly: IServiceAssembly) {
         self.serviceAssembly = serviceAssembly
