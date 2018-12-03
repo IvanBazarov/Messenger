@@ -15,22 +15,15 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
     var fetchResultsController: NSFetchedResultsController<Message>!
     var conversationInteractor: IConversationInteractor!
     var assembly: IPresentationAssembly!
+    var titleLabel: UILabel!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var sendButton: UIButton!
     @IBOutlet var sendMessageTextView: UITextField!
     @IBOutlet var bottomConstraint: NSLayoutConstraint!
-    var onlineUser: Bool = false {
-        didSet {
-                if onlineUser {
-                    setBarSubtitle(subtitle: "В сети")
-                    print("user online")
-                } else {
-                    setBarSubtitle(subtitle: "Не в сети")
-                    print("user offline")
-                }
-        }
-    }
+    var onlineUser: Bool = false
+    var isTextNil: Bool = true
     @IBAction func sendButtonTapped(_ sender: UIButton) {
+        animateSendButton()
         if let text = sendMessageTextView.text, let conversationId = userConversation.convID {
             conversationInteractor.sendMessage(text: text, conversationId: conversationId) { succes, error in
             if succes {
@@ -49,18 +42,53 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
       }
     }
     @IBAction func messageViewChanged(_ sender: Any) {
+        setupNavLabelAndButton()
+        setupSendButton()
+    }
+    func setupNavLabelAndButton() {
+        if onlineUser != userConversation.isOnline {
+            setBarSubtitle(subtitle: userConversation.isOnline ? "В сети" : "Не в сети")
+            animateSendButton()
+            if userConversation.isOnline {
+                animateOnlineNameLabel()
+            } else {
+                animateOfflineNameLabel()
+            }
+            onlineUser = userConversation.isOnline
+        }
+    }
+    func setupSendButton() {
+            if userConversation.isOnline {
+                if sendMessageTextView.text == "" {
+                    if sendButton.isEnabled != false {
+                        sendButton.isEnabled = false
+                        animateSendButton()
+                    }
+                } else {
+                    if sendButton.isEnabled != true {
+                        sendButton.isEnabled = true
+                        animateSendButton()
+                    }
+                }
+            } else {
+                sendButton.isEnabled = false
+            }
+    }
+    func firstLoadSetup() {
         setBarSubtitle(subtitle: userConversation.isOnline ? "В сети" : "Не в сети")
-        if sendMessageTextView.text == "" {
-            sendButton.isEnabled = false
-        } else if userConversation.isOnline {
-            sendButton.isEnabled = true
+        if userConversation.isOnline {
+            animateOnlineNameLabel()
+        } else {
+            animateOfflineNameLabel()
         }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        onlineUser = userConversation.isOnline
         setupViews()
         setupKeyboardFrame()
         setupFRC()
+        firstLoadSetup()
     }
     private func setupFRC() {
         guard let userId = userConversation.convID else { return }
@@ -86,7 +114,7 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
         self.navigationItem.titleView = setTitle(title: userConversation.user?.name ?? "No name", subtitle: subtitle)
     }
     func setTitle(title:String, subtitle:String) -> UIView {
-        let titleLabel = UILabel(frame: CGRect(x:0, y:-2, width:0, height:0))
+        titleLabel = UILabel(frame: CGRect(x:0, y:-2, width:0, height:0))
         titleLabel.backgroundColor = UIColor.clear
         titleLabel.textColor = UIColor.black
         titleLabel.font = UIFont.boldSystemFont(ofSize: 17)
@@ -155,6 +183,38 @@ class ConversationViewController: UIViewController, UITableViewDelegate, UITable
             tableView.scrollToRow(at: indexPath, at: .bottom, animated: false)
         }
     }
+    func animateSendButton() {
+        UIView.animate(withDuration: 0.5,
+                       animations: {
+                        self.sendButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+        },
+                       completion: { _ in
+                        UIView.animate(withDuration: 0.5) {
+                            self.sendButton.transform = CGAffineTransform.identity
+                        }
+        })
+        UIView.animate(withDuration: 0.5,
+                       animations: {
+                        self.sendButton.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        },
+                       completion: { _ in
+                        UIView.animate(withDuration: 0.5) {
+                            self.sendButton.transform = CGAffineTransform.identity
+                        }
+        })
+    }
+    func animateOnlineNameLabel() {
+        UIView.animate(withDuration: 1.0) {
+            self.titleLabel.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+            self.titleLabel.textColor = .green
+        }
+    }
+    func animateOfflineNameLabel() {
+        UIView.animate(withDuration: 1.0) {
+            self.titleLabel.transform = CGAffineTransform(scaleX: 1.0, y: 1.0) 
+            self.titleLabel.textColor = .black
+        }
+    }
     // Table View setup
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -192,6 +252,7 @@ extension ConversationViewController: CommunicationDelegate {
         }
         userConversation.hasUnreadMessages = false
         setBarSubtitle(subtitle: userConversation.isOnline ? "В сети" : "Не в сети")
+        userConversation.isOnline ? animateOnlineNameLabel() : animateOfflineNameLabel()
         tableView.reloadData()
         scrollToLastRow()
     }

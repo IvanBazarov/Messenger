@@ -22,6 +22,8 @@
 		FE7CF311216A376C00F4ECBF /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7CF30F216A376C00F4ECBF /* ConversationTableViewCell.swift */; };
 		FE7E1749218F2D8E00042541 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7E1748218F2D8E00042541 /* StorageManager.swift */; };
 		FE7FFB4F2198B58800A7F883 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = FE7FFB4E2198B58800A7F883 /* .swiftlint.yml */; };
+		FE8E100821B57ECF00305FAA /* TinkoffLogoMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8E100721B57ECF00305FAA /* TinkoffLogoMaker.swift */; };
+		FE8E100A21B582FF00305FAA /* TinkoffLogoNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8E100921B582FF00305FAA /* TinkoffLogoNavigationController.swift */; };
 		FE9DB1662185F58D00CEB400 /* CommunicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9DB1652185F58D00CEB400 /* CommunicationManager.swift */; };
 		FE9DB1682185F62100CEB400 /* Communicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9DB1672185F62100CEB400 /* Communicator.swift */; };
 		FE9DB16C2185F75A00CEB400 /* CommunicationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9DB16B2185F75A00CEB400 /* CommunicationDelegate.swift */; };
@@ -86,6 +88,8 @@
 		FE7CF30F216A376C00F4ECBF /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
 		FE7E1748218F2D8E00042541 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		FE7FFB4E2198B58800A7F883 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
+		FE8E100721B57ECF00305FAA /* TinkoffLogoMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinkoffLogoMaker.swift; sourceTree = "<group>"; };
+		FE8E100921B582FF00305FAA /* TinkoffLogoNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinkoffLogoNavigationController.swift; sourceTree = "<group>"; };
 		FE9DB1652185F58D00CEB400 /* CommunicationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunicationManager.swift; sourceTree = "<group>"; };
 		FE9DB1672185F62100CEB400 /* Communicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Communicator.swift; sourceTree = "<group>"; };
 		FE9DB16B2185F75A00CEB400 /* CommunicationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunicationDelegate.swift; sourceTree = "<group>"; };
@@ -290,6 +294,7 @@
 		FE4CE71921A1C75B005AE8FE /* Moduls */ = {
 			isa = PBXGroup;
 			children = (
+				FE8E100B21B5B07300305FAA /* TinkoffLogoVC */,
 				FEEEE68F21AAE651004BA3E3 /* DonloadImageVC */,
 				FE2155CC21A219FA0005943B /* Model */,
 				FE2155CF21A21AA50005943B /* ConversationListVC */,
@@ -319,6 +324,23 @@
 				FE35D3942173889500853120 /* ThemesViewControllerDelegate.h */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		FE8E100B21B5B07300305FAA /* TinkoffLogoVC */ = {
+			isa = PBXGroup;
+			children = (
+				FE8E100921B582FF00305FAA /* TinkoffLogoNavigationController.swift */,
+				FE8E100C21B5B08B00305FAA /* Model */,
+			);
+			path = TinkoffLogoVC;
+			sourceTree = "<group>";
+		};
+		FE8E100C21B5B08B00305FAA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FE8E100721B57ECF00305FAA /* TinkoffLogoMaker.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		FE9DB1642185F55D00CEB400 /* Communication+DataManagers */ = {
@@ -587,6 +609,7 @@
 				FE7E1749218F2D8E00042541 /* StorageManager.swift in Sources */,
 				FEED6E8621986E1E00D00456 /* Conversation.swift in Sources */,
 				FEB470BD21A1E20200371D64 /* ServicesAssembly.swift in Sources */,
+				FE8E100A21B582FF00305FAA /* TinkoffLogoNavigationController.swift in Sources */,
 				FEEEE68C21AAE5AD004BA3E3 /* RequestConfig.swift in Sources */,
 				FEA2995621AAF46900D1C109 /* ImageRequestsStorageParser.swift in Sources */,
 				FE1F109B217CC26000694AA2 /* ProfileSaveProtocol.swift in Sources */,
@@ -602,6 +625,7 @@
 				FEB470E421A2058200371D64 /* ICommunicationManager.swift in Sources */,
 				FE1F1097217CC0CF00694AA2 /* GCDDataManager.swift in Sources */,
 				FE1F1099217CC0E100694AA2 /* OperationDataManager..swift in Sources */,
+				FE8E100821B57ECF00305FAA /* TinkoffLogoMaker.swift in Sources */,
 				FEA2995821AAF48D00D1C109 /* Requests.swift in Sources */,
 				FEA2995C21AB03AC00D1C109 /* NetworkManager.swift in Sources */,
 				FEB470B921A1E10600371D64 /* PresentationAssembly.swift in Sources */,
